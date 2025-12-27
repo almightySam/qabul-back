@@ -1,0 +1,243 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Jizzax Sambxram Universiteti</title>
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <div class="navbar-logo">🎓</div>
+            <div class="navbar-title">
+                <h1>Admin Panel</h1>
+                <p>Jizzax Sambxram Universiteti</p>
+            </div>
+        </div>
+        <div class="navbar-user">
+            <div class="user-info">
+                <div class="name">Administrator</div>
+                <div class="role">Super Admin</div>
+            </div>
+            <a href="{% url "myapp:logout" %}" class="logout-btn" onclick="logout()">🚪 Logout</a>
+        </div>
+    </nav>
+
+    <!-- Container -->
+
+
+<div class="container mt-5">
+    <div class="row justify-content-center">
+        <div class="col-lg-10">
+            <div class="card shadow-lg border-0">
+                <!-- Header -->
+                <div class="card-header bg-primary text-white text-center py-4">
+                    <h3 class="mb-0">
+                        <i class="fas fa-user-graduate"></i> Qabul arizasi #{{ app.id }}
+                    </h3>
+                    <small class="d-block mt-1">
+                        Yaratilgan sana: {{ app.created_at|date:"d.m.Y H:i" }}
+                    </small>
+                </div>
+
+                <div class="card-body p-4">
+                    <!-- Shaxsiy ma'lumotlar -->
+                    <div class="section mb-5">
+                        <h5 class="section-title"><i class="fas fa-user"></i> Shaxsiy ma'lumotlar</h5>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <strong>F.I.SH:</strong>
+                                    <p class="mb-0">{{ app.full_name }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <strong>Telefon raqami:</strong>
+                                    <p class="mb-0">
+                                        <a href="tel:{{ app.phone }}" class="text-primary">
+                                            {{ app.phone }}
+                                        </a>
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <strong>Yashash manzili:</strong>
+                                    <p class="mb-0">{{ app.address }}</p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <strong>Yo'nalish kategoriyasi:</strong>
+                                    <p class="mb-0 badge bg-info text-dark">
+                                        {{ app.category.name }}
+                                    </p>
+                                </div>
+                            </div>
+                            {% if app.direction %}
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <strong>Yo'nalish:</strong>
+                                    <p class="mb-0">{{ app.direction }}</p>
+                                </div>
+                            </div>
+                            {% endif %}
+                        </div>
+                    </div>
+
+                    <!-- Ta'lim va til -->
+                    <div class="section mb-5">
+                        <h5 class="section-title"><i class="fas fa-graduation-cap"></i> Ta'lim va til</h5>
+                        <div class="row g-4">
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <strong>Tugatgan o'qishi:</strong>
+                                    <p class="mb-0">
+                                        {% if app.education == 'orta_maxsus' %}O'rta maxsus ta'lim{% endif %}
+                                        {% if app.education == 'oliy' %}Oliy ta'lim{% endif %}
+                                        {% if app.education == 'boshqa' %}Boshqa{% endif %}
+                                    </p>
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="info-item">
+                                    <strong>Til bilish darajasi:</strong>
+                                    <p class="mb-0">
+                                        <span class="badge 
+                                            {% if app.language_level == 'ona_tili' %}bg-success
+                                            {% elif app.language_level == 'yuqori' %}bg-primary
+                                            {% elif app.language_level == 'orta' %}bg-warning text-dark
+                                            {% else %}bg-secondary{% endif %}">
+                                            {% if app.language_level == 'boshlangich' %}Boshlang'ich{% endif %}
+                                            {% if app.language_level == 'orta' %}O'rta{% endif %}
+                                            {% if app.language_level == 'yuqori' %}Yuqori{% endif %}
+                                            {% if app.language_level == 'ona_tili' %}Ona tili{% endif %}
+                                        </span>
+                                    </p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Hujjatlar -->
+                    <div class="section mb-5">
+                        <h5 class="section-title"><i class="fas fa-folder-open"></i> Yuklangan hujjatlar</h5>
+                        <div class="row g-4">
+                            <!-- Diplom -->
+                            <div class="col-md-6">
+                                <div class="document-item">
+                                    <strong>Diplom / Shahodatnoma:</strong>
+                                    {% if app.diploma %}
+                                        <a href="{{ app.diploma.url }}" target="_blank" class="btn btn-sm btn-outline-primary mt-1">
+                                            <i class="fas fa-file-pdf"></i> Yuklab olish
+                                        </a>
+                                    {% else %}
+                                        <span class="text-muted mt-1 d-inline-block">Yuklanmagan</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <!-- ID karta -->
+                            <div class="col-md-6">
+                                <div class="document-item">
+                                    <strong>ID karta / Pasport:</strong>
+                                    {% if app.id_card %}
+                                        <a href="{{ app.id_card.url }}" target="_blank" class="btn btn-sm btn-outline-success mt-1">
+                                            <i class="fas fa-id-card"></i> Yuklab olish
+                                        </a>
+                                    {% else %}
+                                        <span class="text-muted mt-1 d-inline-block">Yuklanmagan</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <!-- Ota-ona pasporti -->
+                            <div class="col-md-6">
+                                <div class="document-item">
+                                    <strong>Ota yoki onasi pasporti:</strong>
+                                    {% if app.parent_passport %}
+                                        <a href="{{ app.parent_passport.url }}" target="_blank" class="btn btn-sm btn-outline-info mt-1">
+                                            <i class="fas fa-passport"></i> Yuklab olish
+                                        </a>
+                                    {% else %}
+                                        <span class="text-muted mt-1 d-inline-block">Yuklanmagan</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+
+                            <!-- 3x4 rasm -->
+                            <div class="col-md-6">
+                                <div class="document-item">
+                                    <strong>3x4 rasm:</strong>
+                                    {% if app.photo_3x4 %}
+                                        <div class="mt-2">
+                                            <img src="{{ app.photo_3x4.url }}" alt="3x4 rasm" class="img-thumbnail" style="max-width: 120px; border-radius: 8px;">
+                                        </div>
+                                    {% else %}
+                                        <span class="text-muted mt-1 d-inline-block">Yuklanmagan</span>
+                                    {% endif %}
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Amallar -->
+                    <div class="text-end mt-4">
+                        <a href="" class="btn btn-secondary me-2">
+                            <i class="fas fa-arrow-left"></i> Orqaga
+                        </a>
+                        <a href="#" class="btn btn-warning">
+                            <i class="fas fa-edit"></i> Taxrirlash
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Qo‘shimcha CSS -->
+<style>
+    .section-title {
+        font-size: 1.1rem;
+        font-weight: 600;
+        color: #343a40;
+        border-bottom: 2px solid #007bff;
+        padding-bottom: 8px;
+        margin-bottom: 20px;
+    }
+    .info-item, .document-item {
+        background: #f8f9fa;
+        padding: 12px 16px;
+        border-radius: 8px;
+        border-left: 4px solid #007bff;
+    }
+    .info-item strong, .document-item strong {
+        color: #495057;
+        display: block;
+        margin-bottom: 4px;
+    }
+    .badge {
+        font-size: 0.9rem;
+    }
+    .card {
+        border-radius: 12px;
+        overflow: hidden;
+    }
+</style>
+
+
+
+
+<script>
+
+</script>
+
+
+</body>
+</html>

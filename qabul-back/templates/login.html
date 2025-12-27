@@ -1,0 +1,125 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Jizzax Sambxram Universiteti</title>
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
+</head>
+<body>
+    <!-- Background Animation -->
+    <div class="bg-animation">
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+        <div class="circle"></div>
+    </div>
+
+    <!-- Login Container -->
+    <div class="login-container">
+        <div class="login-header">
+            <div class="logo">🎓</div>
+            <h1>Admin Panel</h1>
+            <p>Jizzax Sambxram Universiteti</p>
+        </div>
+
+        <div class="login-body">
+            {% if messages %}
+            <div id="errorMessage" class="error-message show">
+                {% for message in messages %}
+                    ❌ {{ message }}
+                {% endfor %}
+            </div>
+            {% endif %}
+
+
+
+
+            <form id="loginForm" method="POST" action="{% url 'myapp:login' %}">
+            {% csrf_token %}
+                <div class="form-group">
+                    <label for="username">Login</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">👤</span>
+                        <input type="text" id="username" name="username" placeholder="Login kiriting" required autocomplete="username">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Parol</label>
+                    <div class="input-wrapper">
+                        <span class="input-icon">🔒</span>
+                        <input type="password" id="password" name="password" placeholder="Parol kiriting" required autocomplete="current-password">
+                        <span class="password-toggle" onclick="togglePassword()">👁️</span>
+                    </div>
+                </div>
+
+                <div class="remember-forgot">
+              
+                    <a href="#" class="forgot-password">Parolni unutdingizmi?</a>
+                </div>
+
+                <button type="submit" class="login-btn">
+                    <span>Kirish</span>
+                    <div class="spinner"></div>
+                </button>
+            </form>
+        </div>
+
+        <div class="login-footer">
+            &copy; 2025 Jizzax Sambxram Universiteti
+        </div>
+    </div>
+
+    <script>
+        
+        
+        // Parolni ko'rish / yashirish
+        function togglePassword() {
+            const passwordInput = document.getElementById('password');
+            const toggleIcon = document.querySelector('.password-toggle');
+
+            if (passwordInput.type === 'password') {
+                passwordInput.type = 'text';
+                toggleIcon.textContent = '🙈';
+            } else {
+                passwordInput.type = 'password';
+                toggleIcon.textContent = '👁️';
+            }
+        }
+
+            document.getElementById('loginForm').addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const loginBtn = this.querySelector('.login-btn');
+                const errorMessage = document.getElementById('errorMessage');
+
+                // Xato xabar bo‘lsa — yashirish
+                if (errorMessage) {
+                    errorMessage.classList.remove('show');
+                }
+
+                loginBtn.classList.add('loading');
+                loginBtn.disabled = true;
+
+                setTimeout(() => {
+                    this.submit();
+                }, 800);
+            });
+
+
+        // Input fokus effekti
+        document.querySelectorAll('input').forEach(input => {
+            input.addEventListener('focus', function() {
+                this.parentElement.style.transform = 'scale(1.02)';
+            });
+
+            input.addEventListener('blur', function() {
+                this.parentElement.style.transform = 'scale(1)';
+            });
+        });
+
+    </script>
+</body>
+</html>

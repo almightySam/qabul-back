@@ -1,0 +1,164 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Jizzax Sambxram Universiteti</title>
+    <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+</head>
+<body>
+    <!-- Navbar -->
+    <nav class="navbar">
+        <div class="navbar-brand">
+            <div class="navbar-logo">🎓</div>
+            <div class="navbar-title">
+                <h1>Admin Panel</h1>
+                <p>Jizzax Sambxram Universiteti</p>
+            </div>
+        </div>
+        <div class="navbar-user">
+            <div class="user-info">
+                <div class="name">Administrator</div>
+                <div class="role">Super Admin</div>
+            </div>
+            <a href="{% url "myapp:logout" %}" class="logout-btn" onclick="logout()">🚪 Logout</a>
+        </div>
+    </nav>
+
+    <!-- Container -->
+    <div class="container">
+        <!-- Stats Cards -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon blue">📝</div>
+                <div class="stat-info">
+                    <h3 id="totalApplications">{{ bakalavr_count }}</h3>
+                    <p>Jami arizalar</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon green">✅</div>
+                <div class="stat-info">
+                    <h3 id="approvedApplications">89</h3>
+                    <p>Tasdiqlangan</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon orange">⏳</div>
+                <div class="stat-info">
+                    <h3 id="pendingApplications">45</h3>
+                    <p>Kutilmoqda</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Table Section -->
+        <div class="table-section">
+            <div class="table-header">
+                <h2 class="table-title">Arizalar ro'yxati</h2>
+                <div class="table-actions">
+                    <input type="text" class="search-box" placeholder="🔍 Qidirish..." id="searchInput" oninput="searchTable()">
+                </div>
+            </div>
+
+            <div class="table-wrapper">
+                <table id="applicationsTable">
+                    <thead>
+                        <tr>
+                            <th>ID</th>
+                            <th>F.I.SH</th>
+                            <th>Telefon</th>
+                            <th>Yo'nalish</th>
+                            <th>Sana</th>
+                            <th>Holati</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableBody">
+                         {% for app in qabul%}
+                            <tr>
+                                <td>#{{ app.id }}</td>
+                                <td>{{ app.full_name }}</td>
+                                <td>{{ app.phone }}</td>
+                                <td>{{ app.category }}</td>
+                                <td>{{ app.created_at|date:"Y-m-d" }}</td>
+                                <td>
+                                    <div class="action-buttons">
+                                        <button class="btn btn-view" onclick="viewDetails({{ app.id }})" title="Ko'rish">
+                                            <i class="fas fa-eye"></i> Ko'rish
+                                        </button>
+                                        <a href="{% url 'myapp:application_detail' app.id %}" class="btn btn-download" onclick="editApplication({{ app.id }})" title="Taxrirlash">
+                                            <i class="fas fa-edit"></i> Tahrirlash
+                                        </a>
+                                    </div>
+                                </td>
+                            </tr>
+                            {% empty %}
+                            <tr>
+                                <td colspan="6" style="text-align: center; padding: 40px; font-size: 22px;">
+                                    📭 Hozircha hech qanday ariza yo'q
+                                </td>
+                            </tr>
+                            {% endfor %}
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <!-- Django Pagination -->
+                <div class="pagination">
+                    {% if applications.has_previous %}
+                        <a href="?page=1" class="page-btn">⏮ Birinchi</a>
+                        <a href="?page={{ applications.previous_page_number }}" class="page-btn">◀ Oldingi</a>
+                    {% endif %}
+
+                    {% for num in applications.paginator.page_range %}
+                        {% if applications.number == num %}
+                            <span class="page-btn active">{{ num }}</span>
+                        {% elif num > applications.number|add:'-3' and num < applications.number|add:'3' %}
+                            <a href="?page={{ num }}" class="page-btn">{{ num }}</a>
+                        {% endif %}
+                    {% endfor %}
+
+                    {% if applications.has_next %}
+                        <a href="?page={{ applications.next_page_number }}" class="page-btn">Keyingi ▶</a>
+                        <a href="?page={{ applications.paginator.num_pages }}" class="page-btn">Oxirgi ⏭</a>
+                    {% endif %}
+
+                    <span class="page-info">
+                        {{ applications.start_index }}-{{ applications.end_index }} / {{ applications.paginator.count }}
+                    </span>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+
+<script>
+document.getElementById('searchInput').addEventListener('keyup', function() {
+    const filter = this.value.toLowerCase(); // Qidiruv matni
+    const table = document.getElementById('qabulTable');
+    const trs = table.querySelectorAll('tbody tr');
+
+    trs.forEach(tr => {
+        const tds = tr.querySelectorAll('td');
+        let match = false;
+
+        tds.forEach(td => {
+            if (td.textContent.toLowerCase().includes(filter)) {
+                match = true; // Agar biron td mos kelsa
+            }
+        });
+
+        tr.style.display = match ? '' : 'none'; // Mos keladigan tr ko‘rinadi, qolganlari yashiriladi
+    });
+});
+</script>
+
+
+</body>
+</html>

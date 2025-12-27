@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Kirish - Virtual Qabulxona</title>
+<style>
+  * {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+  }
+  
+  body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: linear-gradient(135deg, #0f172a 0%, #1e293b 50%, #0f172a 100%);
+    color: #e2e8f0;
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    position: relative;
+    overflow: hidden;
+  }
+  
+  body::before {
+    content: '';
+    position: absolute;
+    top: -200px;
+    right: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(139, 92, 246, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 8s ease-in-out infinite;
+  }
+  
+  body::after {
+    content: '';
+    position: absolute;
+    bottom: -200px;
+    left: -200px;
+    width: 600px;
+    height: 600px;
+    background: radial-gradient(circle, rgba(59, 130, 246, 0.15) 0%, transparent 70%);
+    border-radius: 50%;
+    animation: float 10s ease-in-out infinite reverse;
+  }
+  
+  @keyframes float {
+    0%, 100% { transform: translate(0, 0); }
+    50% { transform: translate(30px, 30px); }
+  }
+  
+  .login-container {
+    position: relative;
+    z-index: 1;
+    width: 100%;
+    max-width: 1100px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    background: rgba(30, 41, 59, 0.6);
+    backdrop-filter: blur(20px);
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.4);
+  }
+  
+  .login-left {
+    padding: 60px 50px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.1) 0%, rgba(139, 92, 246, 0.1) 100%);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .logo-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 40px;
+  }
+  
+  .logo-icon {
+    width: 60px;
+    height: 60px;
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 32px;
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.4);
+  }
+  
+  .logo-text h1 {
+    font-size: 22px;
+    font-weight: 800;
+    background: linear-gradient(135deg, #a78bfa 0%, #ec4899 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 4px;
+  }
+  
+  .logo-text p {
+    font-size: 13px;
+    color: #64748b;
+  }
+  
+  .welcome-content h2 {
+    font-size: 36px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  
+  .welcome-content p {
+    font-size: 16px;
+    color: #94a3b8;
+    line-height: 1.7;
+    margin-bottom: 40px;
+  }
+  
+  .features {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+  }
+  
+  .feature-item {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: rgba(51, 65, 85, 0.3);
+    border-radius: 12px;
+    border: 1px solid rgba(148, 163, 184, 0.1);
+    transition: all 0.3s;
+  }
+  
+  .feature-item:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.3);
+    transform: translateX(4px);
+  }
+  
+  .feature-icon {
+    width: 48px;
+    height: 48px;
+    background: linear-gradient(135deg, rgba(59, 130, 246, 0.2), rgba(139, 92, 246, 0.2));
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 24px;
+  }
+  
+  .feature-text h4 {
+    font-size: 15px;
+    font-weight: 600;
+    color: #fff;
+    margin-bottom: 4px;
+  }
+  
+  .feature-text p {
+    font-size: 13px;
+    color: #64748b;
+    margin: 0;
+  }
+  
+  .login-right {
+    padding: 60px 50px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+  
+  .form-header {
+    text-align: center;
+    margin-bottom: 40px;
+  }
+  
+  .form-header h2 {
+    font-size: 28px;
+    font-weight: 800;
+    color: #fff;
+    margin-bottom: 8px;
+  }
+  
+  .form-header p {
+    font-size: 14px;
+    color: #64748b;
+  }
+  
+  .login-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+  }
+  
+  .form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+  }
+  
+  .form-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #e2e8f0;
+  }
+  
+  .input-wrapper {
+    position: relative;
+  }
+  
+  .input-icon {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    font-size: 18px;
+    color: #64748b;
+  }
+  
+  .form-input {
+    width: 100%;
+    padding: 14px 16px 14px 48px;
+    background: rgba(15, 23, 42, 0.5);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 10px;
+    color: #fff;
+    font-size: 14px;
+    transition: all 0.3s;
+  }
+  
+  .form-input:focus {
+    outline: none;
+    border-color: rgba(59, 130, 246, 0.5);
+    box-shadow: 0 0 0 4px rgba(59, 130, 246, 0.1);
+    background: rgba(15, 23, 42, 0.7);
+  }
+  
+  .form-input::placeholder {
+    color: #64748b;
+  }
+  
+  .password-toggle {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+    background: none;
+    border: none;
+    color: #64748b;
+    cursor: pointer;
+    font-size: 18px;
+    padding: 4px;
+    transition: color 0.3s;
+  }
+  
+  .password-toggle:hover {
+    color: #94a3b8;
+  }
+  
+  .form-options {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 14px;
+  }
+  
+  .checkbox-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  
+  .checkbox-wrapper input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+    cursor: pointer;
+    accent-color: #3b82f6;
+  }
+  
+  .checkbox-wrapper label {
+    color: #94a3b8;
+    cursor: pointer;
+  }
+  
+  .forgot-link {
+    color: #60a5fa;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+  }
+  
+  .forgot-link:hover {
+    color: #3b82f6;
+  }
+  
+  .btn-login {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 8px 20px rgba(59, 130, 246, 0.3);
+  }
+  
+  .btn-login:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(59, 130, 246, 0.4);
+  }
+  
+  .btn-login:active {
+    transform: translateY(0);
+  }
+  
+  .divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 24px 0;
+  }
+  
+  .divider::before,
+  .divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: rgba(148, 163, 184, 0.2);
+  }
+  
+  .divider span {
+    color: #64748b;
+    font-size: 13px;
+  }
+  
+  .social-login {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  
+  .social-btn {
+    padding: 12px;
+    background: rgba(51, 65, 85, 0.3);
+    border: 1px solid rgba(148, 163, 184, 0.2);
+    border-radius: 10px;
+    color: #e2e8f0;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.3s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+  }
+  
+  .social-btn:hover {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: rgba(59, 130, 246, 0.5);
+  }
+  
+  .register-link {
+    text-align: center;
+    margin-top: 24px;
+    font-size: 14px;
+    color: #94a3b8;
+  }
+  
+  .register-link a {
+    color: #60a5fa;
+    text-decoration: none;
+    font-weight: 600;
+    transition: color 0.3s;
+  }
+  
+  .register-link a:hover {
+    color: #3b82f6;
+  }
+  
+  .alert {
+    padding: 14px 16px;
+    border-radius: 10px;
+    font-size: 14px;
+    display: none;
+    margin-bottom: 20px;
+  }
+  
+  .alert.error {
+    background: rgba(239, 68, 68, 0.1);
+    border: 1px solid rgba(239, 68, 68, 0.3);
+    color: #f87171;
+  }
+  
+  .alert.success {
+    background: rgba(16, 185, 129, 0.1);
+    border: 1px solid rgba(16, 185, 129, 0.3);
+    color: #34d399;
+  }
+  
+  @media (max-width: 968px) {
+    .login-container {
+      grid-template-columns: 1fr;
+    }
+    
+    .login-left {
+      display: none;
+    }
+    
+    .login-right {
+      padding: 40px 30px;
+    }
+  }
+  
+  @media (max-width: 480px) {
+    .login-right {
+      padding: 30px 20px;
+    }
+    
+    .form-header h2 {
+      font-size: 24px;
+    }
+    
+    .social-login {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>
+</head>
+<body>
+  <div class="login-container">
+    <div class="login-left">
+      <div class="logo-section">
+        <div class="logo-icon">🎓</div>
+        <div class="logo-text">
+          <h1>Jizzax Sambhram</h1>
+          <p>Virtual Qabulxona</p>
+        </div>
+      </div>
+      
+      <div class="welcome-content">
+        <h2>Xush kelibsiz!</h2>
+        <p>Murojaatlarni boshqarish va talabalar bilan samarali muloqot uchun zamonaviy platforma.</p>
+      </div>
+      
+      <div class="features">
+        <div class="feature-item">
+          <div class="feature-icon">⚡</div>
+          <div class="feature-text">
+            <h4>Tezkor javob</h4>
+            <p>Murojaatlarga real vaqtda javob bering</p>
+          </div>
+        </div>
+        
+        <div class="feature-item">
+          <div class="feature-icon">📊</div>
+          <div class="feature-text">
+            <h4>Tahlil va hisobotlar</h4>
+            <p>To'liq statistika va analitika</p>
+          </div>
+        </div>
+        
+        <div class="feature-item">
+          <div class="feature-icon">🔒</div>
+          <div class="feature-text">
+            <h4>Xavfsiz tizim</h4>
+            <p>Ma'lumotlar shifrlangan va himoyalangan</p>
+          </div>
+        </div>
+      </div>
+    </div>
+    
+    <div class="login-right">
+      <div class="form-header">
+        <h2>Tizimga kirish</h2>
+        <p>Hisobingizga kirish uchun ma'lumotlarni kiriting</p>
+      </div>
+      
+      <div id="alert" class="alert"></div>
+      
+      <form class="login-form" id="loginForm">
+        <div class="form-group">
+          <label class="form-label">Email yoki Login</label>
+          <div class="input-wrapper">
+            <span class="input-icon">📧</span>
+            <input type="text" class="form-input" id="username" placeholder="example@mail.com" required>
+          </div>
+        </div>
+        
+        <div class="form-group">
+          <label class="form-label">Parol</label>
+          <div class="input-wrapper">
+            <span class="input-icon">🔒</span>
+            <input type="password" class="form-input" id="password" placeholder="••••••••" required>
+            <button type="button" class="password-toggle" onclick="togglePassword()">👁️</button>
+          </div>
+        </div>
+        
+        <div class="form-options">
+          <div class="checkbox-wrapper">
+            <input type="checkbox" id="remember">
+            <label for="remember">Meni eslab qol</label>
+          </div>
+          <a href="#" class="forgot-link">Parolni unutdingizmi?</a>
+        </div>
+        
+        <button type="submit" class="btn-login">Kirish</button>
+        
+        <div class="divider">
+          <span>yoki</span>
+        </div>
+        
+        <div class="social-login">
+          <button type="button" class="social-btn">
+            <span>G</span>
+            <span>Google</span>
+          </button>
+          <button type="button" class="social-btn">
+            <span>📱</span>
+            <span>One ID</span>
+          </button>
+        </div>
+        
+        <div class="register-link">
+          Hisobingiz yo'qmi? <a href="#">Ro'yxatdan o'ting</a>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <script>
+    function togglePassword() {
+      const passwordInput = document.getElementById('password');
+      const toggleBtn = event.target;
+      
+      if (passwordInput.type === 'password') {
+        passwordInput.type = 'text';
+        toggleBtn.textContent = '🙈';
+      } else {
+        passwordInput.type = 'password';
+        toggleBtn.textContent = '👁️';
+      }
+    }
+    
+    function showAlert(message, type) {
+      const alert = document.getElementById('alert');
+      alert.textContent = message;
+      alert.className = `alert ${type}`;
+      alert.style.display = 'block';
+      
+      setTimeout(() => {
+        alert.style.display = 'none';
+      }, 4000);
+    }
+    
+    document.getElementById('loginForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      const username = document.getElementById('username').value;
+      const password = document.getElementById('password').value;
+      
+      // Demo login
+      if (username === 'admin' && password === 'admin123') {
+        showAlert('Muvaffaqiyatli kirdingiz! Boshqaruv paneliga o\'tilmoqda...', 'success');
+        
+        setTimeout(() => {
+          // Redirect to dashboard
+          // window.location.href = 'dashboard.html';
+          alert('Admin paneliga yo\'naltirilmoqda...');
+        }, 1500);
+      } else {
+        showAlert('Login yoki parol noto\'g\'ri! (Demo: admin / admin123)', 'error');
+      }
+    });
+    
+    // Social login buttons
+    document.querySelectorAll('.social-btn').forEach(btn => {
+      btn.addEventListener('click', function() {
+        const provider = this.textContent.trim();
+        showAlert(`${provider} orqali kirish hozircha mavjud emas`, 'error');
+      });
+    });
+  </script>
+</body>
+</html>

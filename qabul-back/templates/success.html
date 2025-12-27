@@ -1,0 +1,59 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Muvaffaqiyatli — Roʻyxatdan oʻtildi</title>
+  <link rel="stylesheet" href="{% static 'css/success.css' %}" />
+  
+</head>
+<body>
+  <main class="wrap" role="main">
+    <!-- LEFT: branding/hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <h1 id="hero-title">Jizzax Sambhram universiteti</h1>
+      <p>
+        Siz muvaffaqiyatli roʻyxatdan oʻtdingiz! Endi test sinovlariga tayyorlanishingiz yoki shaxsan ofisimiz bilan bogʻlanishingiz mumkin.
+      </p>
+    </section>
+
+    <!-- RIGHT: success card -->
+    <aside class="card" aria-labelledby="succ-title">
+      <div class="success-badge" aria-hidden="true">
+        <!-- check SVG -->
+        <svg viewBox="0 0 24 24" fill="none" aria-hidden="true" focusable="false">
+          <circle cx="12" cy="12" r="11.2" stroke="none" fill="none"/>
+          <path d="M20 7L9.5 18.5L4 13" stroke="none" fill="none"/>
+          <g transform="translate(0,0)">
+            <circle cx="12" cy="12" r="24" fill="none"></circle>
+          </g>
+          <!-- stylized check -->
+          <path d="M7.5 12.5l3 3 6-7" stroke="none" fill="none"/>
+          <!-- actual visible check using stroke -->
+          <path d="M7.5 12.5l3 3 6-7" stroke="#0ea5a0" stroke-width="2.6" stroke-linecap="round" stroke-linejoin="round" fill="none"/>
+        </svg>
+      </div>
+
+      <h2 id="succ-title">Roʻyxatdan muvaffaqiyatli oʻtdingiz!</h2>
+      <p class="lead">Rahmat — arizangiz qabul qilindi. Sizga qoʻshimcha ma'lumot uchun SMS yoki telefon orqali bogʻlanamiz.</p>
+
+      {% for q in qabul|slice:":1" %}
+      <div class="info" role="status" aria-live="polite">
+        <span class="pill">Telefon: {{ q.phone }}</span>
+        <span class="pill">Ariza raqami: <strong>#A{{ q.id }}</strong></span>
+      </div>
+      {% endfor %}
+
+      <div class="actions">
+        <a href="{% url "myapp:qabul_form" %}" onclick="history.back(); return false;" class="btn btn-ghost" title="Orqaga">Orqaga</a>
+        <a href="{% url "myapp:index" %}" class="btn btn-primary" title="Bosh sahifaga o'tish">Bosh sahifaga o'tish</a>
+      </div>
+
+      <p class="note">
+        Agar 24 soat ichida aloqa bo‘lmasa, iltimos +998 99 557 77 49 raqamiga murojaat qiling yoki elektron pochta: <em>contact@sambhram.uz</em>.
+      </p>
+    </aside>
+  </main>
+</body>
+</html>

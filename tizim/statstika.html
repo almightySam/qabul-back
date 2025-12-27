@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Statistika - Virtual Qabulxona</title>
+<link rel="stylesheet" href="./css/statistika.css">
+
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <div class="logo-icon">🎓</div>
+      <span>Jizzax Sambhram — Statistika</span>
+    </div>
+    <nav class="nav">
+      <a href="#" class="nav-link">🏠 Asosiy</a>
+      <a href="#" class="nav-link">📋 Murojaatlar</a>
+      <a href="#" class="nav-link">⚙️ Sozlamalar</a>
+    </nav>
+  </div>
+  
+  <div class="container">
+    <div class="page-header">
+      <div>
+        <h1 class="page-title">Statistika va Hisobotlar</h1>
+        <p class="page-subtitle">Murojaatlar bo'yicha tahlil va natijalar</p>
+      </div>
+      <div class="date-filter">
+        <button class="date-btn">Bugun</button>
+        <button class="date-btn">Hafta</button>
+        <button class="date-btn active">Oy</button>
+        <button class="date-btn">Yil</button>
+      </div>
+    </div>
+    
+    <div class="stats-grid">
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon">📋</div>
+          <div class="stat-trend up">
+            <span>↑</span>
+            <span>12%</span>
+          </div>
+        </div>
+        <div class="stat-number">1,247</div>
+        <div class="stat-label">Jami murojaatlar</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon">✅</div>
+          <div class="stat-trend up">
+            <span>↑</span>
+            <span>8%</span>
+          </div>
+        </div>
+        <div class="stat-number">892</div>
+        <div class="stat-label">Hal qilingan</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon">⏳</div>
+          <div class="stat-trend up">
+            <span>↑</span>
+            <span>5%</span>
+          </div>
+        </div>
+        <div class="stat-number">234</div>
+        <div class="stat-label">Jarayonda</div>
+      </div>
+      
+      <div class="stat-card">
+        <div class="stat-header">
+          <div class="stat-icon">⚡</div>
+          <div class="stat-trend down">
+            <span>↓</span>
+            <span>3%</span>
+          </div>
+        </div>
+        <div class="stat-number">4.5</div>
+        <div class="stat-label">O'rtacha kun (javob)</div>
+      </div>
+    </div>
+    
+    <div class="charts-row">
+      <div class="chart-card">
+        <div class="chart-header">
+          <h3 class="chart-title">Oylik murojaatlar dinamikasi</h3>
+          <div class="chart-legend">
+            <div class="legend-item">
+              <div class="legend-dot" style="background: #3b82f6;"></div>
+              <span style="color: #94a3b8;">Yangi</span>
+            </div>
+            <div class="legend-item">
+              <div class="legend-dot" style="background: #10b981;"></div>
+              <span style="color: #94a3b8;">Hal qilingan</span>
+            </div>
+          </div>
+        </div>
+        <div class="chart-container">
+          <div class="bar-chart">
+            <div class="bar-group">
+              <div class="bars">
+                <div class="bar" style="height: 70%; --bar-color: #3b82f6; --bar-color-light: #60a5fa;"></div>
+                <div class="bar" style="height: 85%; --bar-color: #10b981; --bar-color-light: #34d399;"></div>
+              </div>
+              <div class="bar-label">Yan</div>
+            </div>
+            <div class="bar-group">
+              <div class="bars">
+                <div class="bar" style="height: 60%; --bar-color: #3b82f6; --bar-color-light: #60a5fa;"></div>
+                <div class="bar" style="height: 75%; --bar-color: #10b981; --bar-color-light: #34d399;"></div>
+              </div>
+              <div class="bar-label">Fev</div>
+            </div>
+            <div class="bar-group">
+              <div class="bars">
+                <div class="bar" style="height: 80%; --bar-color: #3b82f6; --bar-color-light: #60a5fa;"></div>
+                <div class="bar" style="height: 90%; --bar-color: #10b981; --bar-color-light: #34d399;"></div>
+              </div>
+              <div class="bar-label">Mar</div>
+            </div>
+            <div class="bar-group">
+              <div class="bars">
+                <div class="bar" style="height: 65%; --bar-color: #3b82f6; --bar-color-light: #60a5fa;"></div>
+                <div class="bar" style="height: 80%; --bar-color: #10b981; --bar-color-light: #34d399;"></div>
+              </div>
+              <div class="bar-label">Apr</div>
+            </div>
+            <div class="bar-group">
+              <div class="bars">
+                <div class="bar" style="height: 90%; --bar-color: #3b82f6; --bar-color-light: #60a5fa;"></div>
+                <div class="bar" style="height: 95%; --bar-color: #10b981; --bar-color-light: #34d399;"></div>
+              </div>
+              <div class="bar-label">May</div>
+            </div>
+            <div class="bar-group">
+              <div class="bars">
+                <div class="bar" style="height: 75%; --bar-color: #3b82f6; --bar-color-light: #60a5fa;"></div>
+                <div class="bar" style="height: 88%; --bar-color: #10b981; --bar-color-light: #34d399;"></div>
+              </div>
+              <div class="bar-label">Iyun</div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <div class="chart-card">
+        <div class="chart-header">
+          <h3 class="chart-title">Murojaat turlari</h3>
+        </div>
+        <div class="chart-container">
+          <div class="pie-chart">
+            <div class="pie-container">
+              <svg width="200" height="200" style="transform: rotate(-90deg);">
+                <circle cx="100" cy="100" r="80" fill="none" stroke="#3b82f6" stroke-width="40" stroke-dasharray="251 503" stroke-dashoffset="0"></circle>
+                <circle cx="100" cy="100" r="80" fill="none" stroke="#10b981" stroke-width="40" stroke-dasharray="125 503" stroke-dashoffset="-251"></circle>
+                <circle cx="100" cy="100" r="80" fill="none" stroke="#f59e0b" stroke-width="40" stroke-dasharray="125 503" stroke-dashoffset="-376"></circle>
+              </svg>
+              <div class="pie-center">
+                <div class="pie-value">1,247</div>
+                <div class="pie-label">Jami</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="category-list">
+          <div class="category-item">
+            <div class="category-color" style="background: #3b82f6;"></div>
+            <div class="category-info">
+              <span class="category-name">Ariza</span>
+              <span class="category-value">623 (50%)</span>
+            </div>
+          </div>
+          <div class="category-item">
+            <div class="category-color" style="background: #10b981;"></div>
+            <div class="category-info">
+              <span class="category-name">Shikoyat</span>
+              <span class="category-value">312 (25%)</span>
+            </div>
+          </div>
+          <div class="category-item">
+            <div class="category-color" style="background: #f59e0b;"></div>
+            <div class="category-info">
+              <span class="category-name">Taklif</span>
+              <span class="category-value">312 (25%)</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    
+  </div>
+</body>
+</html>

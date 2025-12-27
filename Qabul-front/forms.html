@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hujjat Topshirish - Jizzax Sambxram Universiteti</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+            min-height: 100vh;
+            position: relative;
+            overflow-x: hidden;
+        }
+
+        /* Hexagon Background */
+        .hexagon-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: 0;
+            overflow: hidden;
+        }
+
+        .hexagon {
+            position: absolute;
+            width: 100px;
+            height: 57.74px;
+            background: rgba(255, 255, 255, 0.3);
+            margin: 28.87px 0;
+            box-shadow: 0 0 20px rgba(0, 0, 0, 0.05);
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .hexagon:before,
+        .hexagon:after {
+            content: "";
+            position: absolute;
+            width: 0;
+            border-left: 50px solid transparent;
+            border-right: 50px solid transparent;
+        }
+
+        .hexagon:before {
+            bottom: 100%;
+            border-bottom: 28.87px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hexagon:after {
+            top: 100%;
+            border-top: 28.87px solid rgba(255, 255, 255, 0.3);
+        }
+
+        .hex1 { top: 10%; left: 5%; animation-delay: 0s; }
+        .hex2 { top: 20%; left: 15%; animation-delay: 1s; }
+        .hex3 { top: 40%; left: 8%; animation-delay: 2s; }
+        .hex4 { top: 60%; left: 12%; animation-delay: 0.5s; }
+        .hex5 { top: 15%; right: 10%; animation-delay: 1.5s; }
+        .hex6 { top: 35%; right: 5%; animation-delay: 2.5s; }
+        .hex7 { top: 55%; right: 15%; animation-delay: 0.8s; }
+        .hex8 { top: 75%; right: 8%; animation-delay: 1.8s; }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px) rotate(0deg); }
+            50% { transform: translateY(-20px) rotate(5deg); }
+        }
+
+        /* Blue Corner Design */
+        .corner-design {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 300px;
+            height: 300px;
+            background: linear-gradient(135deg, #003d7a 0%, #0051a5 100%);
+            clip-path: polygon(100% 0, 100% 100%, 0 0);
+            z-index: 1;
+        }
+
+        /* Container */
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: 40px 20px;
+            position: relative;
+            z-index: 2;
+        }
+
+        /* Header Section */
+        .header-section {
+            text-align: center;
+            margin-bottom: 50px;
+            animation: fadeInDown 1s ease-out;
+        }
+
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header-section h1 {
+            color: #003d7a;
+            font-size: 42px;
+            font-weight: 800;
+            margin-bottom: 15px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+        }
+
+        .header-section p {
+            color: #555;
+            font-size: 18px;
+            font-weight: 400;
+        }
+
+        /* Form Card */
+        .form-card {
+            background: white;
+            border-radius: 30px;
+            padding: 50px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.15);
+            animation: fadeInUp 1s ease-out;
+            position: relative;
+            overflow: hidden;
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .form-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 6px;
+            background: linear-gradient(90deg, #2196F3 0%, #1976D2 50%, #0D47A1 100%);
+        }
+
+        .form-title {
+            text-align: center;
+            color: #d32f2f;
+            font-size: 28px;
+            font-weight: 700;
+            margin-bottom: 40px;
+        }
+
+        /* Form Grid */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 25px;
+            margin-bottom: 25px;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-group label {
+            color: #333;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 14px;
+        }
+
+        .form-group input,
+        .form-group select {
+            padding: 15px 20px;
+            border: 2px solid #e0e0e0;
+            border-radius: 12px;
+            font-size: 16px;
+            transition: all 0.3s ease;
+            background: #f8f9fa;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: #2196F3;
+            background: white;
+            box-shadow: 0 0 0 4px rgba(33, 150, 243, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #999;
+        }
+
+        /* File Upload */
+        .file-upload-wrapper {
+            position: relative;
+            overflow: hidden;
+            display: inline-block;
+            width: 100%;
+        }
+
+        .file-upload-wrapper input[type=file] {
+            position: absolute;
+            left: -9999px;
+        }
+
+        .file-upload-label {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 15px 20px;
+            background: linear-gradient(135deg, #e3f2fd 0%, #bbdefb 100%);
+            border: 2px dashed #2196F3;
+            border-radius: 12px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            color: #1976D2;
+            font-weight: 600;
+        }
+
+        .file-upload-label:hover {
+            background: linear-gradient(135deg, #bbdefb 0%, #90caf9 100%);
+            transform: translateY(-2px);
+        }
+
+        .file-name {
+            margin-top: 10px;
+            color: #666;
+            font-size: 14px;
+            font-style: italic;
+        }
+
+        /* Submit Button */
+        .submit-btn {
+            width: 100%;
+            padding: 18px;
+            background: linear-gradient(135deg, #2196F3 0%, #1976D2 100%);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(33, 150, 243, 0.4);
+            margin-top: 20px;
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 35px rgba(33, 150, 243, 0.6);
+        }
+
+        .submit-btn:active {
+            transform: translateY(-1px);
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            background: linear-gradient(135deg, #4caf50 0%, #388e3c 100%);
+            color: white;
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 20px;
+            animation: slideIn 0.5s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .success-message.show {
+            display: block;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .form-card {
+                padding: 30px 20px;
+            }
+
+            .header-section h1 {
+                font-size: 32px;
+            }
+
+            .corner-design {
+                width: 200px;
+                height: 200px;
+            }
+
+            .hexagon {
+                width: 60px;
+                height: 34.64px;
+                margin: 17.32px 0;
+            }
+
+            .hexagon:before,
+            .hexagon:after {
+                border-left: 30px solid transparent;
+                border-right: 30px solid transparent;
+            }
+
+            .hexagon:before {
+                border-bottom: 17.32px solid rgba(255, 255, 255, 0.3);
+            }
+
+            .hexagon:after {
+                border-top: 17.32px solid rgba(255, 255, 255, 0.3);
+            }
+        }
+
+        /* Loading Spinner */
+        .spinner {
+            display: none;
+            width: 20px;
+            height: 20px;
+            border: 3px solid rgba(255, 255, 255, 0.3);
+            border-top-color: white;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin: 0 auto;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .submit-btn.loading .spinner {
+            display: block;
+        }
+
+        .submit-btn.loading span {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Hexagon Background -->
+    <div class="hexagon-bg">
+        <div class="hexagon hex1"></div>
+        <div class="hexagon hex2"></div>
+        <div class="hexagon hex3"></div>
+        <div class="hexagon hex4"></div>
+        <div class="hexagon hex5"></div>
+        <div class="hexagon hex6"></div>
+        <div class="hexagon hex7"></div>
+        <div class="hexagon hex8"></div>
+    </div>
+
+    <!-- Corner Design -->
+    <div class="corner-design"></div>
+
+    <!-- Main Container -->
+    <div class="container">
+        <!-- Header -->
+        <div class="header-section">
+            <h1>Jizzax Sambxram universiteti qabul dasturiga xush kelibsiz!</h1>
+            <p>Test sinovlariga qatnashish uchun shaxsiy ma'lumotlaringizni to'ldiring!</p>
+        </div>
+
+        <!-- Form Card -->
+        <div class="form-card">
+            <h2 class="form-title">Hujjat topshirish</h2>
+            
+            <form id="applicationForm">
+                <div class="form-grid">
+                    <!-- Familiya Ism Sharifi -->
+                    <div class="form-group">
+                        <label for="fullname">Familiya Ism Sharifi *</label>
+                        <input type="text" id="fullname" name="fullname" placeholder="Masalan: Aliyev Vali Akramovich" required>
+                    </div>
+
+                    <!-- Telefon Raqam -->
+                    <div class="form-group">
+                        <label for="phone">Telefon raqam *</label>
+                        <input type="tel" id="phone" name="phone" placeholder="+998 90 123 45 67" required>
+                    </div>
+
+                    <!-- Yoshi -->
+                    <div class="form-group">
+                        <label for="age">Yoshi *</label>
+                        <input type="number" id="age" name="age" placeholder="18" min="16" max="100" required>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" name="email" placeholder="example@mail.com">
+                    </div>
+
+                    <!-- File Upload - Passport -->
+                    <div class="form-group">
+                        <label>Pasport yoki ID karta nusxasi *</label>
+                        <div class="file-upload-wrapper">
+                            <input type="file" id="passportUpload" name="passportUpload" accept=".pdf,.jpg,.jpeg,.png" onchange="updateFileName('passport')" required>
+                            <label for="passportUpload" class="file-upload-label">
+                                📁 Pasport yuklash
+                            </label>
+                        </div>
+                        <div class="file-name" id="passportFileName">Fayl tanlanmagan</div>
+                    </div>
+
+                    <!-- File Upload - Diploma -->
+                    <div class="form-group">
+                        <label>Diplom nusxasi *</label>
+                        <div class="file-upload-wrapper">
+                            <input type="file" id="diplomaUpload" name="diplomaUpload" accept=".pdf,.jpg,.jpeg,.png" onchange="updateFileName('diploma')" required>
+                            <label for="diplomaUpload" class="file-upload-label">
+                                📁 Diplom yuklash
+                            </label>
+                        </div>
+                        <div class="file-name" id="diplomaFileName">Fayl tanlanmagan</div>
+                    </div>
+
+                    <!-- Yo'nalishlar -->
+                    <div class="form-group">
+                        <label for="direction">Yo'nalishlar *</label>
+                        <select id="direction" name="direction" required>
+                            <option value="">Yo'nalishni tanlang</option>
+                            <option value="axborot">Axborot Texnologiyalari</option>
+                            <option value="boshlangich">Boshlang'ich Ta'lim</option>
+                            <option value="matematika">Matematika va Informatika</option>
+                            <option value="til">Chet Tillari</option>
+                            <option value="psixologiya">Psixologiya</option>
+                            <option value="tarix">Tarix</option>
+                        </select>
+                    </div>
+
+                    <!-- Ta'lim Tili -->
+                    <div class="form-group">
+                        <label for="language">Ta'lim tili *</label>
+                        <select id="language" name="language" required>
+                            <option value="">Ta'lim tilini tanlang</option>
+                            <option value="uzbek">O'zbek tili</option>
+                            <option value="russian">Rus tili</option>
+                            <option value="english">Ingliz tili</option>
+                        </select>
+                    </div>
+
+                    <!-- Ariza Turi -->
+                    <div class="form-group">
+                        <label for="applicationType">Ariza turi *</label>
+                        <select id="applicationType" name="applicationType" required>
+                            <option value="">Ariza turini tanlang</option>
+                            <option value="kunduzgi">Kunduzgi</option>
+                            <option value="masofaviy">Masofaviy</option>
+                            <option value="sirtqi">Sirtqi</option>
+                        </select>
+                    </div>
+
+                    <!-- Ta'lim Shakli -->
+                    <div class="form-group">
+                        <label for="educationForm">Ta'lim shakli *</label>
+                        <select id="educationForm" name="educationForm" required>
+                            <option value="">Ta'lim shaklini tanlang</option>
+                            <option value="bakalavr">Bakalavr</option>
+                            <option value="magistr">Magistratura</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Submit Button -->
+                <button type="submit" class="submit-btn">
+                    <span>Jo'natish</span>
+                    <div class="spinner"></div>
+                </button>
+
+                <!-- Success Message -->
+                <div class="success-message" id="successMessage">
+                    ✅ Arizangiz muvaffaqiyatli qabul qilindi! Tez orada siz bilan bog'lanamiz.
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        // File name update
+        function updateFileName(type) {
+            if (type === 'passport') {
+                const fileInput = document.getElementById('passportUpload');
+                const fileNameDisplay = document.getElementById('passportFileName');
+                
+                if (fileInput.files.length > 0) {
+                    fileNameDisplay.textContent = '✓ ' + fileInput.files[0].name;
+                    fileNameDisplay.style.color = '#4caf50';
+                } else {
+                    fileNameDisplay.textContent = 'Fayl tanlanmagan';
+                    fileNameDisplay.style.color = '#666';
+                }
+            } else if (type === 'diploma') {
+                const fileInput = document.getElementById('diplomaUpload');
+                const fileNameDisplay = document.getElementById('diplomaFileName');
+                
+                if (fileInput.files.length > 0) {
+                    fileNameDisplay.textContent = '✓ ' + fileInput.files[0].name;
+                    fileNameDisplay.style.color = '#4caf50';
+                } else {
+                    fileNameDisplay.textContent = 'Fayl tanlanmagan';
+                    fileNameDisplay.style.color = '#666';
+                }
+            }
+        }
+
+        // Form submission
+        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const submitBtn = this.querySelector('.submit-btn');
+            const successMessage = document.getElementById('successMessage');
+            
+            // Show loading
+            submitBtn.classList.add('loading');
+            submitBtn.disabled = true;
+            
+            // Simulate form submission
+            setTimeout(() => {
+                // Hide loading
+                submitBtn.classList.remove('loading');
+                submitBtn.disabled = false;
+                
+                // Show success message
+                successMessage.classList.add('show');
+                
+                // Reset form
+                this.reset();
+                document.getElementById('passportFileName').textContent = 'Fayl tanlanmagan';
+                document.getElementById('passportFileName').style.color = '#666';
+                document.getElementById('diplomaFileName').textContent = 'Fayl tanlanmagan';
+                document.getElementById('diplomaFileName').style.color = '#666';
+                
+                // Hide success message after 5 seconds
+                setTimeout(() => {
+                    successMessage.classList.remove('show');
+                }, 5000);
+            }, 2000);
+        });
+
+        // Phone number formatting
+        document.getElementById('phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+            if (value.startsWith('998')) {
+                value = value.substring(3);
+            }
+            if (value.length > 0) {
+                value = '+998 ' + value;
+            }
+            if (value.length > 7) {
+                value = value.slice(0, 8) + ' ' + value.slice(8);
+            }
+            if (value.length > 11) {
+                value = value.slice(0, 11) + ' ' + value.slice(11);
+            }
+            if (value.length > 14) {
+                value = value.slice(0, 14) + ' ' + value.slice(14, 16);
+            }
+            e.target.value = value;
+        });
+
+        // Form validation
+        const inputs = document.querySelectorAll('input[required], select[required]');
+        inputs.forEach(input => {
+            input.addEventListener('invalid', function(e) {
+                e.preventDefault();
+                this.style.borderColor = '#d32f2f';
+            });
+            
+            input.addEventListener('input', function() {
+                if (this.validity.valid) {
+                    this.style.borderColor = '#4caf50';
+                } else {
+                    this.style.borderColor = '#e0e0e0';
+                }
+            });
+        });
+    </script>
+</body>
+</html>

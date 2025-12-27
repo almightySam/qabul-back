@@ -1,0 +1,178 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hujjat Topshirish - Jizzax Sambxram Universiteti</title>
+    <link rel="stylesheet" href="{% static 'css/forms.css' %}">
+</head>
+<body>
+
+    <!-- Hexagon Background -->
+    <div class="hexagon-bg">
+        <div class="hexagon hex1"></div>
+        <div class="hexagon hex2"></div>
+        <div class="hexagon hex3"></div>
+        <div class="hexagon hex4"></div>
+        <div class="hexagon hex5"></div>
+        <div class="hexagon hex6"></div>
+        <div class="hexagon hex7"></div>
+        <div class="hexagon hex8"></div>
+    </div>
+
+    <!-- Corner Design -->
+    <div class="corner-design"></div>
+
+    <div class="container">
+
+        <div class="header-section">
+            <h1>Jizzax Sambxram universiteti qabul dasturiga xush kelibsiz!</h1>
+            <p>Test sinovlariga qatnashish uchun shaxsiy ma'lumotlaringizni to'ldiring!</p>
+        </div>
+
+        <div class="form-card">
+            <h2 class="form-title">Hujjat topshirish</h2>
+
+<form id="applicationForm" method="POST" enctype="multipart/form-data">
+    {% csrf_token %}
+
+    <div class="form-grid">
+
+        <!-- F.I.SH -->
+        <div class="form-group">
+            <label for="id_full_name">Familiya Ism Sharifi *</label>
+            <input type="text" id="id_full_name" name="full_name"
+                   placeholder="Masalan: Aliyev Vali Akramovich"
+                   value="{{ form.full_name.value|default:'' }}" required>
+            {{ form.full_name.errors }}
+        </div>
+
+        <!-- Telefon -->
+        <div class="form-group">
+            <label for="id_phone">Telefon raqam *</label>
+            <input type="tel" id="id_phone" name="phone"
+                   placeholder="+998901234567"
+                   value="{{ form.phone.value|default:'' }}" required>
+            {{ form.phone.errors }}
+        </div>
+
+        <!-- Manzil -->
+        <div class="form-group">
+            <label for="id_address">Yashash manzilingiz *</label>
+            <input type="text" id="id_address" name="address"
+                   placeholder="Masalan: Toshkent, Chilonzor..."
+                   value="{{ form.address.value|default:'' }}" required>
+            {{ form.address.errors }}
+        </div>
+
+        <!-- Ta'lim -->
+        <div class="form-group">
+            <label for="id_education">Qaysi o‘qishni tugatgansiz *</label>
+            {{ form.education }}
+            {{ form.education.errors }}
+        </div>
+
+        <!-- Yo‘nalish kategoriyasi -->
+        <div class="form-group">
+            <label for="id_category">Yo‘nalish kategoriyasi *</label>
+            {{ form.category }}
+            {{ form.category.errors }}
+        </div>
+
+        <!-- Til -->
+        <div class="form-group">
+            <label for="id_language_level">Til bilish darajasi *</label>
+            {{ form.language_level }}
+            {{ form.language_level.errors }}
+        </div>
+
+        <!-- ID karta -->
+        <div class="form-group">
+            <label>Pasport yoki ID karta *</label>
+            <label class="custom-file-upload">
+                <input type="file" name="id_card" accept=".pdf,.jpg,.jpeg,.png" required>
+                <span class="file-label">📁 Fayl tanlanmadi</span>
+            </label>
+            {{ form.id_card.errors }}
+        </div>
+
+        <!-- Diploma -->
+        <div class="form-group">
+            <label>Diplom yoki Shahodatnoma *</label>
+            <label class="custom-file-upload">
+                <input type="file" name="diploma" accept=".pdf,.jpg,.jpeg,.png" required>
+                <span class="file-label">📁 Fayl tanlanmadi</span>
+            </label>
+            {{ form.diploma.errors }}
+        </div>
+
+        <!-- Ota-ona pasporti -->
+        <div class="form-group">
+            <label>Ota yoki onasi pasporti *</label>
+            <label class="custom-file-upload">
+                <input type="file" name="parent_passport" accept=".pdf,.jpg,.jpeg,.png" required>
+                <span class="file-label">📁 Fayl tanlanmadi</span>
+            </label>
+            {{ form.parent_passport.errors }}
+        </div>
+
+        <!-- 3x4 rasm -->
+        <div class="form-group">
+            <label>3x4 rasm *</label>
+            <label class="custom-file-upload">
+                <input type="file" name="photo_3x4" accept=".jpg,.jpeg,.png" required>
+                <span class="file-label">📁 Fayl tanlanmadi</span>
+            </label>
+            {{ form.photo_3x4.errors }}
+        </div>
+
+    </div>
+
+    <button type="submit" class="submit-btn">
+        <span>Jo'natish</span>
+        <div class="spinner"></div>
+    </button>
+
+    {% if form.errors %}
+        <div class="error-message mb-2">
+            ❌ Arizada xatolik bor. Iltimos, tekshirib qayta yuboring.
+        </div>
+    {% endif %}
+
+    {% if success %}
+        <div class="success-message mb-2">
+            ✅ Arizangiz muvaffaqiyatli qabul qilindi!
+        </div>
+    {% endif %}
+
+</form>
+
+        </div>
+    </div>
+
+    <script>
+
+        /* Fayl nomini avtomatik chiqarish */
+        document.querySelectorAll('input[type="file"]').forEach(input => {
+            input.addEventListener('change', function() {
+                const fileName = this.files.length ? this.files[0].name : "Fayl tanlanmadi";
+                this.nextElementSibling.textContent = "📁 " + fileName;
+            });
+        });
+
+        /* Telefon raqam formatlash */
+        document.getElementById('id_phone').addEventListener('input', function(e) {
+            let value = e.target.value.replace(/\D/g, '');
+
+            if (!value.startsWith('998')) value = '998' + value;
+
+            value = '+' + value;
+
+            e.target.value = value;
+        });
+
+    </script>
+
+</body>
+</html>
