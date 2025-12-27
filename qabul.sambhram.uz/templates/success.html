@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Account</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+
+    <style>
+        /* Umumiy stillar */
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            margin: 0;
+            background: linear-gradient(135deg, #a1c4fd, #c2e9fb); /* Gradient fon */
+            padding: 20px;
+        }
+        .signup-form {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            text-align: center;
+        }
+        .success-message p {
+            margin: 10px 0;
+            font-size: 16px;
+            text-align:left;
+        }
+        .success-message a {
+            display: inline-block;
+            margin-top: 20px;
+            color: #007bff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+        .success-message a:hover {
+            text-decoration: underline;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-form">
+        <div class="success-message">
+            <h2>Ma'lumotlar muvaffaqiyatli saqlandi!</h2>
+            <p>F.I.SH: {{ data.name }}</p>
+            <p>Telefon raqami: {{ data.number }}</p>
+            <p>Yashash manzili: {{ data.shaxar }}</p>
+            <p>O'qish joyi: {{ data.education }}</p>
+            <p>Fan: {{ data.userFan }}</p>
+            <p>Til bilish darajasi: {{ data.userTill }}</p>
+            <a href="{% url 'index' %}">Bosh Sahifa</a>
+        </div>
+        <h3>Arizangiz muvaffaqiyatli topshirildi. Biz siz bilan aloqaga chiqamiz...</h3>
+    </div>
+</body>
+</html>

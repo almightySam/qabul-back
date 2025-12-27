@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+
+<section class="main mb-5">
+  <div class="container"> 
+
+      <div class="box-success">
+          
+          <div class="img-box">
+              <img src="{% static 'img/success.png' %}" alt="">
+          </div>
+          
+          <span class="succes-text1">So’rov</span><br>
+          <span class="succes-text2">Muaffaqiyatli yuborildi</span>
+          
+          <center>
+              <h6><a href="{% url "index" %}">Orqaga qaytish</a></h6>
+          </center>
+      </div>
+      
+
+    </div>
+  </section>
+    
+
+{% endblock content %}   

@@ -1,0 +1,134 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rektor Qabuli</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap_5_3_2.css' %}">
+  </head>
+  <body>
+
+<nav class="navbar navbar-expand-lg navbar-gradient shadow-sm">
+  <div class="container">
+
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center fw-bold" href="{% url 'index' %}">
+      {% comment %} <img src="{% static 'img/logo.png' %}" alt="rektor.jizpi.uz" width="45" height="45" class="me-2"> {% endcomment %}
+      Jizzax Sambhram Universiteti Virtual qabulxonasi
+    </a>
+
+    <!-- Toggler -->
+    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarGradient"
+      aria-controls="navbarGradient" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menyu -->
+    <div class="collapse navbar-collapse" id="navbarGradient">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+
+        <!-- Login / Logout -->
+        <li class="nav-item">
+          {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="btn btn-outline-light ms-lg-3">Chiqish</a>
+          {% else %}
+            <a href="{% url 'login' %}" class="btn-login ms-lg-3">Kirish</a>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+
+
+
+<main class="container my-5">
+
+  <!-- Banner qismi -->
+  <section class="text-center mb-5">
+    <div class="card border-0 shadow-lg rounded-4 p-4 bg-light">
+      <div class="row align-items-center">
+        
+        <!-- Rektor rasmi -->
+        <div class="col-md-4 mb-3 mb-md-0">
+          <img src="{% static 'img/rektor.JPG' %}" alt="Rektor rasmi"
+               class="img-fluid rounded-circle shadow" style="max-width: 300px;">
+        </div>
+        
+        <!-- Matn -->
+        <div class="col-md-8 text-md-start">
+          <h2 class="fw-bold text-primary">Jizzax Sambhram Universiteti Rektori</h2>
+          <h4 class="text-warning">DJUMA XUSANOV</h4>
+          <p class="text-muted mt-3">
+            Hurmatli fuqarolar! Ushbu platforma orqali siz rektor qabulxonasiga murojaat yuborishingiz mumkin.
+            Bizning maqsadimiz — sizning taklif va muammolaringizni tez va samarali ko‘rib chiqish.
+          </p>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- Statistika qismi -->
+  <section class="mb-5">
+    <div class="row g-4 text-center">
+
+      <div class="col-md-4">
+        <div class="card shadow-sm border-0 rounded-4 p-4 h-100">
+          <h3 class="text-primary fw-bold">120+</h3>
+          <p class="mb-0">Umumiy murojaatlar</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm border-0 rounded-4 p-4 h-100">
+          <h3 class="text-success fw-bold">90+</h3>
+          <p class="mb-0">Ko‘rib chiqilgan</p>
+        </div>
+      </div>
+
+      <div class="col-md-4">
+        <div class="card shadow-sm border-0 rounded-4 p-4 h-100">
+          <h3 class="text-warning fw-bold">75+</h3>
+          <p class="mb-0">Javob berilgan</p>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="mb-5">
+    <div class="row g-4 text-center">
+      <a href="{% url 'index' %}" class='text-center-a'>Ariza yuborish</a>
+    </div>
+  </section>
+
+</main>
+
+
+
+
+
+
+
+
+<footer class="bg-dark text-light text-center py-3 mt-5">
+  <div class="container">
+    <p class="mb-1">&copy; 2025 Jizzax Sambhram Universiteti</p>
+    <small class="text-muted">Barcha huquqlar himoyalangan</small>
+  </div>
+</footer>
+
+        
+
+
+
+
+    <script src="{% static 'js/bootstrap5.3.js' %}"></script>
+  </body>
+</html>

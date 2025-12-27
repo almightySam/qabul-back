@@ -1,0 +1,89 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rektor Qabuli</title>
+    
+    <!-- main CSS -->
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+  </head>
+  <body>
+
+    <div class="wrapper">
+      <form method="POST" class="login">
+        {% csrf_token %}
+        <p class="title">UNIVERSITET ELEKTRON QABULXONASI</p>
+        
+        {{ form.username }}
+        <i class="fa fa-user"></i>
+        
+        {{ form.password }}
+        <i class="fa fa-key"></i>
+        
+        <a href="https://t.me/Nazaroff7869">Parol esdan chiqdimi?</a>
+        
+        <button type="submit">
+          <!-- Agar Font Awesome ishlatmoqchi bo‘lsangiz -->
+          <!-- <i class="fas fa-spinner fa-spin"></i> -->
+          <i class="spinner"></i>
+          <span class="state">Log in</span>
+        </button>
+        {% if messages %}
+          <ul class="messages">
+            {% for message in messages %}
+              <li>{{ message }}</li>
+            {% endfor %}
+          </ul>
+        {% endif %}
+
+      </form>
+
+      <footer>
+        <a href="{% url 'main' %}">Bu Sahifaga faqat Admin kiroladi</a>
+      </footer>
+    </div>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+  var working = false;
+  $('.login').on('submit', function(e) {
+    e.preventDefault(); // darrov yubormaymiz
+    
+    if (working) return;
+    working = true;
+
+    var $this = $(this),
+        $state = $this.find('button > .state');
+    $this.addClass('loading');
+    $state.html('Authenticating...');
+
+    // 3 soniyadan keyin "Welcome back!"
+    setTimeout(function() {
+      $this.addClass('ok');
+      $state.html('Welcome back!');
+
+      // 2 soniyadan keyin haqiqiy submit (5 soniya umumiy)
+      setTimeout(function() {
+        $state.html('Log in');
+        $this.removeClass('ok loading');
+        working = false;
+
+        // 🔹 Endi haqiqiy formani yuboramiz
+        $this.off('submit'); // preventDefault blokini olib tashlash
+        $this.submit();
+      }, 2000);
+
+    }, 3000);
+  });
+</script>
+
+
+  </body>
+</html>

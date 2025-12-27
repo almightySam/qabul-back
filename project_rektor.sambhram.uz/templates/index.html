@@ -1,0 +1,130 @@
+{% extends "base.html" %}
+{% load static %}
+{% block content %}
+
+  <section class="main mb-5">
+      <div class="container">
+        <div class="center-text-box">
+          <span>Sizda hal etilmagan masalalar muammolar, ariza, shikoyat yoki takliflar bormi?</span>
+          <span>U holda murojaatingizni to'g'ridan-to'g'ri Jizzax Sambhram Universiteti rektoriga yuborishingiz mumkin.</span>        
+        </div>
+      </div>
+
+      <div class="container">
+  
+      <form method="post" class="row g-3 mt-5">
+        {% csrf_token %}
+
+        <!-- Familiya -->
+        <div class="col-md-6">
+          <label for="id_last_name" class="form-label">Familiya</label>
+          {{ form.last_name }}
+        </div>
+
+        <!-- Ism -->
+        <div class="col-md-6">
+          <label for="id_first_name" class="form-label">Ism</label>
+          {{ form.first_name }}
+        </div>
+
+        <!-- Manzil -->
+        <div class="col-12">
+          <label for="id_address" class="form-label">Manzil</label>
+          {{ form.address }}
+        </div>
+
+        <!-- Telefon raqami -->
+        <div class="col-md-6">
+          <label for="id_tel_number" class="form-label">Telefon raqami</label>
+          {{ form.tel_number }}
+        </div>
+
+        <!-- Email -->
+        <div class="col-md-6">
+          <label for="id_email" class="form-label">Email</label>
+          {{ form.email }}
+        </div>
+
+        <!-- Murojaat turi -->
+        <div class="col-md-6">
+          <label for="id_application_type" class="form-label">Murojaat turi</label>
+          {{ form.application_type }}
+        </div>
+
+        <!-- Viloyat -->
+        <div class="col-md-6">
+          <label for="id_region" class="form-label">Viloyat</label>
+          {{ form.region }}
+        </div>
+
+        <!-- Jinsi -->
+        <div class="col-md-6">
+          <label for="id_gender" class="form-label">Jinsi</label>
+          {{ form.gender }}
+        </div>
+
+        <!-- Qisqacha mazmun -->
+        <div class="col-12">
+          <label for="id_topic" class="form-label">Murojaat qisqacha mazmuni</label>
+          {{ form.topic }}
+        </div>
+
+        <!-- To‘liq matn -->
+        <div class="col-12">
+          <label for="id_body" class="form-label">Murojaat matni</label>
+          {{ form.body }}
+        </div>
+
+        <!-- Fayl -->
+        <div class="col-12">
+          <label for="id_files" class="form-label">Fayl</label>
+          {{ form.files }}
+        </div>
+
+        <!-- Submit button -->
+        <div class="col-12 text-center">
+          <button type="submit" class="btn btn-primary px-5">Jo'natish</button>
+          <a href="{% url 'main' %}" class="btn btn-secondary px-5">Orqaga</a>
+        </div>
+        <div class="col-12 text-center">
+        </div>
+      </form>
+
+  
+      
+        
+          <!-- Button trigger modal -->
+          <a href="#" data-bs-toggle="modal" data-bs-target="#exampleModal" class="Modal-text"><b>Ommaviy oferta</b></a>
+
+          <!-- Modal -->
+          <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-xl">
+              <div class="modal-content">
+                <div class="modal-header">
+                  <h1 class="modal-title fs-5" id="exampleModalLabel">Hurmatli foydalanuvchi!</h1>
+                  <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                  <b>Sizga Jizzax Sambhram Universiteti rektoriga bevosita elektron tarzda murojaatlarni yuborish imkoniyati taqdim etilmoqda. Shu bilan birga, Sizning yuborayotgan murojaatingiz rasmiy maqomga ega ekanligini ham eslatib qo’ymoqchimiz. Shu sababli, Sizdan quyidagilarni unutmasligingizni so’raymiz:</b>
+                  <br>
+                  <p>1. Jismoniy shaxs sifatida murojaat yo’llasangiz familiyangiz (ismingiz, otangizning ismi), yashash joyingiz to’g’risidagi ma’lumotlar ko’rsatilgan va murojaatingiz mohiyati bayon etilgan bo’lishi shart. Yuridik shaxs sifatida murojaat yo’llasangiz yuridik shaxsning to’liq nomi, uning joylashgan joyi (pochta manzili) to’g’risidagi ma’lumotlar ko’rsatilgan va murojaatning mohiyati bayon etilishi talab etiladi.</p>
+                  <P>2. Alohida e’tibor bering! Tuhmat, haqorat so’zlar ishlatilgan va yolg’on xabar beruvchi murojaatlarni taqdim etish mumkin emas.</P>
+                  <p>3. Shuningdek, quyidagi holatlarda murojaatlaringiz rad etilishi mumkinligini eslatib o’tmoqchimiz: odobsizlik mazmunidagi murojaatlar (uyatsiz yoxud haqoratli iboralar, tahdidlar, mantiq va ma’nosi bo’lmagan takliflar va shunga o’xshash murojaatlar); murojaat matnida tushunarsiz qisqartirishlar yoki reklama materiallari mavjud bo’lgan, tarkibida aniq arizalar, shikoyatlar yoki takliflar bo’lmagan murojaatlar</p>
+                  <p>4. Shuningdek, foydalanuvchining bir necha bor bitta masala bo’yicha javob berilgan murojaatini qayta yuborilganda agar unda yangi vajlar yoki holatlar keltirilmagan bo’lsa, ko’rib chiqilmaydi. Mazkur shartlarning barchasi O’zbekiston Respublikasining amaldagi qonunchiligidan kelib chiqqan holda belgilangan.</p>
+                </div>
+              
+              </div>
+            </div>
+          </div>
+
+
+      </div>
+  </section>
+    
+{% endblock content %}
+
+
+ 
+
+
+

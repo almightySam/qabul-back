@@ -1,0 +1,75 @@
+{% load static %}
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Rektor Qabuli</title>
+    <link rel="stylesheet" href="{% static 'css/main.css' %}">
+    <link rel="stylesheet" href="{% static 'css/bootstrap_5_3_2.css' %}">
+  </head>
+  <body>
+
+<nav class="navbar navbar-expand-lg navbar-gradient shadow-sm">
+  <div class="container">
+
+    <!-- Logo -->
+    <a class="navbar-brand d-flex align-items-center fw-bold" href="{% url 'index' %}">
+      {% comment %} <img src="{% static 'img/logo.png' %}" alt="rektor.jizpi.uz" width="45" height="45" class="me-2"> {% endcomment %}
+      Jizzax Sambhram Universiteti Virtual qabulxonasi
+    </a>
+
+    <!-- Toggler -->
+    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarGradient"
+      aria-controls="navbarGradient" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <!-- Menyu -->
+    <div class="collapse navbar-collapse" id="navbarGradient">
+      <ul class="navbar-nav ms-auto align-items-lg-center">
+
+
+        <!-- Login / Logout -->
+        <li class="nav-item">
+          {% if user.is_authenticated %}
+            <a href="{% url 'logout' %}" class="btn btn-outline-light ms-lg-3">Chiqish</a>
+          {% else %}
+            <a href="{% url 'login' %}" class="btn-login ms-lg-3">Kirish</a>
+          {% endif %}
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</nav>
+
+    
+        <!-- Navbar end -->
+    
+
+
+        {% block content %}{% endblock content %}
+
+
+
+
+
+
+
+
+<footer class="bg-dark text-light text-center py-3 mt-5">
+  <div class="container">
+    <p class="mb-1">&copy; 2025 Jizzax Sambhram Universiteti</p>
+    <small class="text-muted">Barcha huquqlar himoyalangan</small>
+  </div>
+</footer>
+
+        
+
+
+
+
+    <script src="{% static 'js/bootstrap5.3.js' %}"></script>
+  </body>
+</html>

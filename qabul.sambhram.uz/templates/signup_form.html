@@ -1,0 +1,104 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sambhram Universiteti - Ro‘yxatdan o‘tish</title>
+    <link rel="stylesheet" href="{% static 'main.css' %}">
+    <style>
+        .signup-form {
+            max-width: 800px;
+            margin: 50px auto;
+            padding: 20px;
+            background-color: #f9f9f9;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            display: block;
+            margin: 0 auto 20px;
+            max-width: 250px;
+        }
+        h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+        input[type="text"], input[type="tel"], select, input[type="file"] {
+            width: 100%;
+            padding: 8px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-sizing: border-box;
+        }
+        button {
+            width: 100%;
+            padding: 10px;
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #0056b3;
+        }
+        .error {
+            color: red;
+            font-weight: bold;
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="signup-form">
+        <img class="logo" src="{% static 'newLogo.png' %}" alt="Sambhram Universiteti logotipi">
+        <h2>Sambhram Universitetiga masofadan turib hujjat topshirish</h2>
+        {% if error %}
+            <p class="error">{{ error }}</p>
+        {% elif form.errors %}
+            <p class="error">Formada xatoliklar mavjud: {{ form.errors }}</p>
+        {% endif %}
+        <form method="POST" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <button type="submit">SAQLASH</button>
+        </form>
+    </div>
+
+    <script>
+        document.querySelector('input[name="number"]').addEventListener('input', function(e) {
+            const value = e.target.value;
+            const regex = /^\+[0-9]{1,4}[0-9]{9,12}$/;
+            if (!regex.test(value)) {
+                e.target.style.borderColor = 'red';
+                e.target.setCustomValidity('Iltimos, to‘g‘ri telefon raqamini kiriting (masalan: +998901234567)');
+            } else {
+                e.target.style.borderColor = 'green';
+                e.target.setCustomValidity('');
+            }
+        });
+
+        const fileInputs = document.querySelectorAll('input[type="file"]');
+        fileInputs.forEach(input => {
+            input.addEventListener('change', function() {
+                const allowedExtensions = ['pdf', 'doc', 'docx', 'jpg', 'jpeg', 'png'];
+                const fileName = this.files[0]?.name.split('.').pop().toLowerCase();
+                if (fileName && !allowedExtensions.includes(fileName)) {
+                    alert(`Faqat ${allowedExtensions.join(', ')} formatidagi fayllar qabul qilinadi!`);
+                    this.value = '';
+                }
+            });
+        });
+    </script>
+</body>
+</html>
