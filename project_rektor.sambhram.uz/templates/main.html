@@ -1,134 +1,173 @@
-{% load static %}
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Rektor Qabuli</title>
-    <link rel="stylesheet" href="{% static 'css/main.css' %}">
-    <link rel="stylesheet" href="{% static 'css/bootstrap_5_3_2.css' %}">
-  </head>
-  <body>
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Jizzax Sambhram Universiteti – Virtual Qabulxona</title>
+<link rel="stylesheet" href="../static/css/main.css">
 
-<nav class="navbar navbar-expand-lg navbar-gradient shadow-sm">
-  <div class="container">
 
-    <!-- Logo -->
-    <a class="navbar-brand d-flex align-items-center fw-bold" href="{% url 'index' %}">
-      {% comment %} <img src="{% static 'img/logo.png' %}" alt="rektor.jizpi.uz" width="45" height="45" class="me-2"> {% endcomment %}
-      Jizzax Sambhram Universiteti Virtual qabulxonasi
-    </a>
-
-    <!-- Toggler -->
-    <button class="navbar-toggler text-white" type="button" data-bs-toggle="collapse" data-bs-target="#navbarGradient"
-      aria-controls="navbarGradient" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-
-    <!-- Menyu -->
-    <div class="collapse navbar-collapse" id="navbarGradient">
-      <ul class="navbar-nav ms-auto align-items-lg-center">
-
-        <!-- Login / Logout -->
-        <li class="nav-item">
-          {% if user.is_authenticated %}
-            <a href="{% url 'logout' %}" class="btn btn-outline-light ms-lg-3">Chiqish</a>
-          {% else %}
-            <a href="{% url 'login' %}" class="btn-login ms-lg-3">Kirish</a>
-          {% endif %}
-        </li>
-      </ul>
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <div class="logo-icon">🎓</div>
+      <span>Jizzax Sambhram — Virtual Qabulxona</span>
     </div>
-
+    <nav class="nav">
+      <a href="#" class="nav-link">📚 Ta'lim</a>
+      <a href="#" class="nav-link">📊 Statistikalar</a>
+      <button class="btn-primary" onclick="scrollToForm()">📝 Ariza yuborish</button>
+    </nav>
   </div>
-</nav>
-
-
-
-
-<main class="container my-5">
-
-  <!-- Banner qismi -->
-  <section class="text-center mb-5">
-    <div class="card border-0 shadow-lg rounded-4 p-4 bg-light">
-      <div class="row align-items-center">
-        
-        <!-- Rektor rasmi -->
-        <div class="col-md-4 mb-3 mb-md-0">
-          <img src="{% static 'img/rektor.JPG' %}" alt="Rektor rasmi"
-               class="img-fluid rounded-circle shadow" style="max-width: 300px;">
-        </div>
-        
-        <!-- Matn -->
-        <div class="col-md-8 text-md-start">
-          <h2 class="fw-bold text-primary">Jizzax Sambhram Universiteti Rektori</h2>
-          <h4 class="text-warning">DJUMA XUSANOV</h4>
-          <p class="text-muted mt-3">
-            Hurmatli fuqarolar! Ushbu platforma orqali siz rektor qabulxonasiga murojaat yuborishingiz mumkin.
-            Bizning maqsadimiz — sizning taklif va muammolaringizni tez va samarali ko‘rib chiqish.
-          </p>
-        </div>
-
-      </div>
-    </div>
-  </section>
-
-
-  <!-- Statistika qismi -->
-  <section class="mb-5">
-    <div class="row g-4 text-center">
-
-      <div class="col-md-4">
-        <div class="card shadow-sm border-0 rounded-4 p-4 h-100">
-          <h3 class="text-primary fw-bold">120+</h3>
-          <p class="mb-0">Umumiy murojaatlar</p>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="card shadow-sm border-0 rounded-4 p-4 h-100">
-          <h3 class="text-success fw-bold">90+</h3>
-          <p class="mb-0">Ko‘rib chiqilgan</p>
-        </div>
-      </div>
-
-      <div class="col-md-4">
-        <div class="card shadow-sm border-0 rounded-4 p-4 h-100">
-          <h3 class="text-warning fw-bold">75+</h3>
-          <p class="mb-0">Javob berilgan</p>
-        </div>
-      </div>
-
-    </div>
-  </section>
-
-  <section class="mb-5">
-    <div class="row g-4 text-center">
-      <a href="{% url 'index' %}" class='text-center-a'>Ariza yuborish</a>
-    </div>
-  </section>
-
-</main>
-
-
-
-
-
-
-
-
-<footer class="bg-dark text-light text-center py-3 mt-5">
+  
   <div class="container">
-    <p class="mb-1">&copy; 2025 Jizzax Sambhram Universiteti</p>
-    <small class="text-muted">Barcha huquqlar himoyalangan</small>
-  </div>
-</footer>
-
+    <aside class="sidebar">
+      <div class="university-logo">🎓</div>
+      <div class="university-name">Jizzax Sambhram Universiteti</div>
+      
+      <div class="rector-card">
+        <div class="rector-avatar">👤</div>
+        <div class="rector-title">Jizzax Sambhram Universiteti Rektori</div>
+        <div class="rector-name">DJUMA XUSANOV</div>
+        <p class="rector-desc">Ushbu platforma orqali rektor qabulxonasiga onlayn murojaat yuborishingiz mumkin. Taklif va muammolaringiz tez ko'rib chiqiladi.</p>
+      </div>
+      
+      <div class="quick-links">
+        <a href="#" class="quick-link">
+          <span class="quick-link-icon">📝</span>
+          <div class="quick-link-content">
+            <h4>Ariza yuborish</h4>
+            <p>Tez va oson</p>
+          </div>
+        </a>
         
-
-
-
-
-    <script src="{% static 'js/bootstrap5.3.js' %}"></script>
-  </body>
+        <a href="#" class="quick-link">
+          <span class="quick-link-icon">👤</span>
+          <div class="quick-link-content">
+            <h4>Rektor</h4>
+            <p>DJUMA XUSANOV</p>
+          </div>
+        </a>
+        
+        <a href="#" class="quick-link">
+          <span class="quick-link-icon">📊</span>
+          <div class="quick-link-content">
+            <h4>Statistika</h4>
+            <p>120+ murojaat</p>
+          </div>
+        </a>
+        
+        <a href="#" class="quick-link">
+          <span class="quick-link-icon">📍</span>
+          <div class="quick-link-content">
+            <h4>Manzil</h4>
+            <p>Jizzax shahri</p>
+          </div>
+        </a>
+      </div>
+    </aside>
+    
+    <main class="main-content">
+      <div style="position: relative; overflow: hidden;">
+        <div class="glow-effect"></div>
+        
+        <h1 class="main-title">Virtual Qabulxona</h1>
+        <div class="main-subtitle">RECTOR RECEPTION</div>
+        <p class="main-desc">
+          Hurmatli fuqarolar! Ushbu zamonaviy platforma orqali siz onlayn ravishda rektor qabulxonasiga 
+          murojaat yuborishingiz mumkin. Biz ishni avtomatlashtiirish va murojaatlarni tezkor ko'rib chiqish 
+          orqali sizning rituammolaringizni samarali hal qilamiz.
+        </p>
+        
+        <div class="stats">
+          <div class="stat-card">
+            <div class="stat-number">120+</div>
+            <div class="stat-label">Umumiy murojaatlar</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">90+</div>
+            <div class="stat-label">Ko'rib chiqilgan</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">75+</div>
+            <div class="stat-label">Javob berilgan</div>
+          </div>
+        </div>
+        
+        <div class="action-buttons">
+          <button class="btn-primary" onclick="scrollToForm()">📝 Ariza yuborish</button>
+          <button class="btn-secondary">🏢 Fakultetlar</button>
+        </div>
+        
+        <div class="contact-info">
+          <p>Yordam kerakmi? Biz bilan bog'laning: <strong>+998 99 557 77 49</strong></p>
+        </div>
+      </div>
+      
+      <div style="height: 40px;"></div>
+      
+      <div id="form-section" style="background: rgba(51, 65, 85, 0.3); border-radius: 12px; padding: 30px; margin-top: 40px;">
+        <h2 style="font-size: 24px; margin-bottom: 20px; color: #fff;">📝 Murojaat yuborish</h2>
+        
+        <form id="appealForm" style="display: flex; flex-direction: column; gap: 20px;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <input type="text" placeholder="Familiyangiz *" required style="padding: 12px; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 8px; color: #fff; font-size: 14px;">
+            <input type="text" placeholder="Ismingiz *" required style="padding: 12px; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 8px; color: #fff; font-size: 14px;">
+          </div>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <input type="email" placeholder="Email" style="padding: 12px; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 8px; color: #fff; font-size: 14px;">
+            <input type="tel" placeholder="Telefon *" required style="padding: 12px; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 8px; color: #fff; font-size: 14px;">
+          </div>
+          
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 15px;">
+            <select required style="padding: 12px; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 8px; color: #94a3b8; font-size: 14px;">
+              <option value="">Murojaat turi *</option>
+              <option value="ariza">Ariza</option>
+              <option value="shikoyat">Shikoyat</option>
+              <option value="taklif">Taklif</option>
+            </select>
+            <select style="padding: 12px; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 8px; color: #94a3b8; font-size: 14px;">
+              <option value="">Viloyat</option>
+              <option value="jizzax">Jizzax</option>
+              <option value="toshkent">Toshkent</option>
+              <option value="samarqand">Samarqand</option>
+            </select>
+          </div>
+          
+          <input type="text" placeholder="Murojaat mavzusi" style="padding: 12px; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 8px; color: #fff; font-size: 14px;">
+          
+          <textarea placeholder="Murojaat matni *" required style="padding: 12px; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 8px; color: #fff; font-size: 14px; min-height: 120px; resize: vertical; font-family: inherit;"></textarea>
+          
+          <input type="file" style="padding: 12px; background: rgba(15, 23, 42, 0.5); border: 1px solid rgba(148, 163, 184, 0.2); border-radius: 8px; color: #94a3b8; font-size: 14px;">
+          
+          <div style="display: flex; gap: 12px;">
+            <button type="submit" class="btn-primary" style="flex: 1;">Jo'natish</button>
+            <button type="reset" onclick="reset()" class="btn-secondary" style="flex: 1;">Tozalash</button>
+          </div>
+        </form>
+      </div>
+    </main>
+  </div>
+  
+  <div class="footer">
+    © 2026 Jizzax Sambhram Universiteti — Virtual Qabulxona
+  </div>
+  
+  <script>
+    function scrollToForm() {
+      document.getElementById('form-section').scrollIntoView({ behavior: 'smooth' });
+    }
+    
+    document.getElementById('appealForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      alert('Murojaatingiz muvaffaqiyatli yuborildi!');
+      this.reset();
+    });
+    function reset(){
+      window.location.reload();      
+    }
+  </script>
+</body>
 </html>

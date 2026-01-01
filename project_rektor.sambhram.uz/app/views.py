@@ -37,39 +37,6 @@ def main(request):
 
 
 
-def index(request):
-    if request.method == 'POST':
-        form = PostForm(request.POST)
-        if form.is_valid():
-            form.save()
-            return redirect('success')
-    else:
-        form = PostForm()
-    
-    return render(request, 'index.html', {'form': form})
-
-
-def success(request):
-    return render(request, 'success.html')
-
-
-
-
-
-
-class PostListView(LoginRequiredMixin, ListView):
-    model = Post
-    context_object_name = 'posts'
-    template_name = "list.html"
-
-
-
-class PostDetailView(LoginRequiredMixin, DetailView):
-    model = Post
-    context_object_name = 'post'
-    template_name = "detail.html"
-
-
 
 def user_logout(request):
     logout(request)

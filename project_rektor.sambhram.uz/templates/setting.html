@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Sozlamalar - Virtual Qabulxona</title>
+
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <div class="logo-icon">🎓</div>
+      <span>Jizzax Sambhram — Sozlamalar</span>
+    </div>
+    <nav class="nav">
+      <a href="#" class="nav-link">🏠 Asosiy</a>
+      <a href="#" class="nav-link">📋 Murojaatlar</a>
+      <a href="#" class="nav-link">📊 Statistika</a>
+    </nav>
+  </div>
+  
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">Sozlamalar</h1>
+      <p class="page-subtitle">Tizim va profil sozlamalarini boshqaring</p>
+    </div>
+    
+    <div class="settings-grid">
+      <div class="settings-sidebar">
+        <div class="settings-menu">
+          <div class="menu-item active" data-section="profile">
+            <span class="menu-icon">👤</span>
+            <span>Profil</span>
+          </div>
+          <div class="menu-item" data-section="notifications">
+            <span class="menu-icon">🔔</span>
+            <span>Bildirishnomalar</span>
+          </div>
+          <div class="menu-item" data-section="system">
+            <span class="menu-icon">⚙️</span>
+            <span>Tizim</span>
+          </div>
+          <div class="menu-item" data-section="appearance">
+            <span class="menu-icon">🎨</span>
+            <span>Ko'rinish</span>
+          </div>
+          <div class="menu-item" data-section="security">
+            <span class="menu-icon">🔒</span>
+            <span>Xavfsizlik</span>
+          </div>
+          <div class="menu-item" data-section="advanced">
+            <span class="menu-icon">🔧</span>
+            <span>Qo'shimcha</span>
+          </div>
+        </div>
+      </div>
+      
+      <div class="settings-content">
+        <div id="alert" class="alert"></div>
+        
+        <!-- Profile Section -->
+        <div class="section active" id="profile">
+          <h2 class="section-title">Profil sozlamalari</h2>
+          <p class="section-desc">Shaxsiy ma'lumotlaringizni tahrirlang</p>
+          
+          <div class="settings-card">
+            <div style="text-align: center;">
+              <div class="user-avatar">👤</div>
+              <button class="btn-secondary">Rasmni o'zgartirish</button>
+            </div>
+          </div>
+          
+          <div class="settings-card">
+            <div class="form-group">
+              <label class="form-label">To'liq ism</label>
+              <input type="text" class="form-input" value="DJUMA XUSANOV" placeholder="Ismingizni kiriting">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Lavozim</label>
+              <input type="text" class="form-input" value="Rektor" placeholder="Lavozimingiz">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Email</label>
+              <input type="email" class="form-input" value="rector@jsu.uz" placeholder="email@example.com">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Telefon</label>
+              <input type="tel" class="form-input" value="+998 93 123 45 67" placeholder="+998">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Bio</label>
+              <textarea class="form-input" placeholder="O'zingiz haqingizda qisqacha ma'lumot...">Jizzax Sambhram Universiteti rektori</textarea>
+            </div>
+            
+            <div class="btn-group">
+              <button class="btn-primary" onclick="saveSettings('profile')">Saqlash</button>
+              <button class="btn-secondary">Bekor qilish</button>
+            </div>
+          </div>
+          
+          <div class="settings-card">
+            <h3 class="card-title">Statistika</h3>
+            <div class="stats-row">
+              <div class="stat-box">
+                <div class="stat-value">124</div>
+                <div class="stat-label">Jami murojaatlar</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-value">98</div>
+                <div class="stat-label">Hal qilingan</div>
+              </div>
+              <div class="stat-box">
+                <div class="stat-value">26</div>
+                <div class="stat-label">Kutilmoqda</div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <!-- Notifications Section -->
+        <div class="section" id="notifications">
+          <h2 class="section-title">Bildirishnomalar</h2>
+          <p class="section-desc">Bildirishnoma sozlamalarini boshqaring</p>
+          
+          <div class="settings-card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Email bildirshnomalari</h3>
+                <p class="card-desc">Yangi murojaatlar haqida email orqali xabar olish</p>
+              </div>
+              <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+            </div>
+          </div>
+          
+          <div class="settings-card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">SMS bildirishnomalar</h3>
+                <p class="card-desc">Muhim yangiliklar uchun SMS xabarnomalar</p>
+              </div>
+              <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+            </div>
+          </div>
+          
+          <div class="settings-card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Push bildirishnomalar</h3>
+                <p class="card-desc">Brauzer orqali bildirishnomalar olish</p>
+              </div>
+              <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+            </div>
+          </div>
+          
+          <div class="settings-card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Kunlik hisobot</h3>
+                <p class="card-desc">Har kuni soat 18:00 da umumiy hisobot</p>
+              </div>
+              <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+            </div>
+          </div>
+          
+          <div class="btn-group">
+            <button class="btn-primary" onclick="saveSettings('notifications')">Saqlash</button>
+          </div>
+        </div>
+        
+        <!-- System Section -->
+        <div class="section" id="system">
+          <h2 class="section-title">Tizim sozlamalari</h2>
+          <p class="section-desc">Umumiy tizim sozlamalarini sozlang</p>
+          
+          <div class="settings-card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Avtomatik javob</h3>
+                <p class="card-desc">Yangi murojaatlarga avtomatik javob yuborish</p>
+              </div>
+              <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+            </div>
+          </div>
+          
+          <div class="settings-card">
+            <div class="form-group">
+              <label class="form-label">Avtomatik javob matni</label>
+              <textarea class="form-input">Hurmatli fuqaro, murojaatingiz qabul qilindi va tez orada ko'rib chiqiladi. Rahmat!</textarea>
+            </div>
+          </div>
+          
+          <div class="settings-card">
+            <div class="form-group">
+              <label class="form-label">Murojaatni ko'rib chiqish muddati (kun)</label>
+              <input type="number" class="form-input" value="7" min="1" max="30">
+            </div>
+          </div>
+          
+          <div class="settings-card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Fayl yuklashga ruxsat</h3>
+                <p class="card-desc">Foydalanuvchilar fayl biriktirishi mumkin</p>
+              </div>
+              <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+            </div>
+          </div>
+          
+          <div class="settings-card">
+            <div class="form-group">
+              <label class="form-label">Maksimal fayl hajmi (MB)</label>
+              <input type="number" class="form-input" value="5" min="1" max="50">
+            </div>
+          </div>
+          
+          <div class="btn-group">
+            <button class="btn-primary" onclick="saveSettings('system')">Saqlash</button>
+          </div>
+        </div>
+        
+        <!-- Appearance Section -->
+        <div class="section" id="appearance">
+          <h2 class="section-title">Ko'rinish</h2>
+          <p class="section-desc">Interfeys ko'rinishini sozlang</p>
+          
+          <div class="settings-card">
+            <h3 class="card-title" style="margin-bottom: 16px;">Rang sxemasi</h3>
+            <div class="color-picker">
+              <div class="color-option selected" style="background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);" onclick="selectColor(this)"></div>
+              <div class="color-option" style="background: linear-gradient(135deg, #10b981 0%, #14b8a6 100%);" onclick="selectColor(this)"></div>
+              <div class="color-option" style="background: linear-gradient(135deg, #f59e0b 0%, #eab308 100%);" onclick="selectColor(this)"></div>
+              <div class="color-option" style="background: linear-gradient(135deg, #ec4899 0%, #a855f7 100%);" onclick="selectColor(this)"></div>
+              <div class="color-option" style="background: linear-gradient(135deg, #ef4444 0%, #dc2626 100%);" onclick="selectColor(this)"></div>
+            </div>
+          </div>
+          
+          <div class="settings-card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Qorong'i rejim</h3>
+                <p class="card-desc">Hozir faol holatda</p>
+              </div>
+              <div class="toggle-switch active" onclick="toggleSwitch(this)"></div>
+            </div>
+          </div>
+          
+          <div class="settings-card">
+            <div class="form-group">
+              <label class="form-label">Til</label>
+              <select class="form-input">
+                <option value="uz" selected>O'zbekcha</option>
+                <option value="ru">Русский</option>
+                <option value="en">English</option>
+              </select>
+            </div>
+          </div>
+          
+          <div class="btn-group">
+            <button class="btn-primary" onclick="saveSettings('appearance')">Saqlash</button>
+          </div>
+        </div>
+        
+        <!-- Security Section -->
+        <div class="section" id="security">
+          <h2 class="section-title">Xavfsizlik</h2>
+          <p class="section-desc">Hisob xavfsizligini boshqaring</p>
+          
+          <div class="settings-card">
+            <h3 class="card-title" style="margin-bottom: 16px;">Parolni o'zgartirish</h3>
+            
+            <div class="form-group">
+              <label class="form-label">Hozirgi parol</label>
+              <input type="password" class="form-input" placeholder="••••••••">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Yangi parol</label>
+              <input type="password" class="form-input" placeholder="••••••••">
+            </div>
+            
+            <div class="form-group">
+              <label class="form-label">Yangi parolni tasdiqlang</label>
+              <input type="password" class="form-input" placeholder="••••••••">
+            </div>
+            
+            <button class="btn-primary">Parolni yangilash</button>
+          </div>
+          
+          <div class="settings-card">
+            <div class="card-header">
+              <div>
+                <h3 class="card-title">Ikki faktorli autentifikatsiya</h3>
+                <p class="card-desc">Qo'shimcha xavfsizlik qatlami</p>
+              </div>
+              <div class="toggle-switch" onclick="toggleSwitch(this)"></div>
+            </div>
+          </div>
+          
+          <div class="settings-card">
+            <h3 class="card-title" style="margin-bottom: 8px;">Faol seanslar</h3>
+            <p class="card-desc" style="margin-bottom: 16px;">Siz hozir 2 ta qurilmada faolsiz</p>
+            <button class="btn-danger">Barcha seanslarni tugatish</button>
+          </div>
+        </div>
+        
+        <!-- Advanced Section -->
+        <div class="section" id="advanced">
+          <h2 class="section-title">Qo'shimcha</h2>
+          <p class="section-desc">Tizimning qo'shimcha sozlamalari</p>
+          
+          <div class="settings-card">
+            <h3 class="card-title" style="margin-bottom: 8px;">Ma'lumotlarni eksport qilish</h3>
+            <p class="card-desc" style="margin-bottom: 16px;">Barcha murojaatlarni Excel yoki PDF formatida yuklab olish</p>
+            <div class="btn-group">
+              <button class="btn-secondary">📊 Excel</button>
+              <button class="btn-secondary">📄 PDF</button>
+            </div>
+          </div>
+          
+          <div class="settings-card">
+            <h3 class="card-title" style="margin-bottom: 8px;">Ma'lumotlar bazasini tozalash</h3>
+            <p class="card-desc" style="margin-bottom: 16px;">Eski murojaatlarni o'chirish</p>
+            <button class="btn-danger">Tozalash</button>
+          </div>
+          
+          <div class="settings-card">
+            <h3 class="card-title" style="margin-bottom: 8px;">Tizimni qayta yuklash</h3>
+            <p class="card-desc" style="margin-bottom: 16px;">Barcha sozlamalarni standart holatga qaytarish</p>
+            <button class="btn-danger">Qayta tiklash</button>
+          </div>
+          
+          <div class="settings-card">
+            <h3 class="card-title" style="margin-bottom: 8px;">Tizim haqida</h3>
+            <p class="card-desc">
+              <strong>Versiya:</strong> 1.0.0<br>
+              <strong>Oxirgi yangilanish:</strong> 22.11.2025<br>
+              <strong>Texnik yordam:</strong> support@jsu.uz
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+<script>
+  // Menu navigation
+  document.querySelectorAll('.menu-item').forEach(item => {
+    item.addEventListener('click', function() {
+      // Remove active class from all items
+      document.querySelectorAll('.menu-item').forEach(i => i.classList.remove('active'));
+      document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+      
+      // Add active class to clicked item
+      this.classList.add('active');
+      const section = this.getAttribute('data-section');
+      document.getElementById(section).classList.add('active');
+      
+      // Scroll to top of content
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+  });
+  
+  // Toggle switch
+  function toggleSwitch(element) {
+    element.classList.toggle('active');
+  }
+  
+  // Color picker
+  function selectColor(element) {
+    document.querySelectorAll('.color-option').forEach(option => {
+      option.classList.remove('selected');
+    });
+    element.classList.add('selected');
+    
+    // Show success message
+    showAlert('Rang sxemasi muvaffaqiyatli o\'zgartirildi!', 'success');
+  }
+  
+  // Show alert messages
+  function showAlert(message, type) {
+    const alert = document.getElementById('alert');
+    alert.textContent = message;
+    alert.className = `alert ${type}`;
+    alert.style.display = 'block';
+    
+    setTimeout(() => {
+      alert.style.display = 'none';
+    }, 3000);
+  }
+  
+  // Save settings
+  function saveSettings(section) {
+    const sectionNames = {
+      profile: 'Profil',
+      notifications: 'Bildirishnomalar',
+      system: 'Tizim',
+      appearance: 'Ko\'rinish',
+      security: 'Xavfsizlik',
+      advanced: 'Qo\'shimcha'
+    };
+    
+    showAlert(`${sectionNames[section]} sozlamalari muvaffaqiyatli saqlandi!`, 'success');
+    
+    // Simulate saving data
+    setTimeout(() => {
+      console.log(`Settings saved for ${section}`);
+    }, 500);
+  }
+  
+  // Form validation and styling
+  document.querySelectorAll('.form-input').forEach(input => {
+    input.addEventListener('input', function() {
+      if (this.value.trim() !== '') {
+        this.style.borderColor = 'rgba(16, 185, 129, 0.5)';
+      } else {
+        this.style.borderColor = 'rgba(148, 163, 184, 0.2)';
+      }
+    });
+    
+    input.addEventListener('blur', function() {
+      this.style.borderColor = 'rgba(148, 163, 184, 0.2)';
+    });
+  });
+  
+  // Password change handler
+  document.querySelectorAll('.btn-primary').forEach(btn => {
+    if (btn.textContent.includes('Parolni yangilash')) {
+      btn.addEventListener('click', function() {
+        showAlert('Parol muvaffaqiyatli yangilandi!', 'success');
+      });
+    }
+  });
+  
+  // Danger buttons confirmation
+  document.querySelectorAll('.btn-danger').forEach(btn => {
+    btn.addEventListener('click', function(e) {
+      e.preventDefault();
+      const confirmMsg = confirm('Ishonchingiz komilmi? Bu amalni bekor qilish mumkin emas!');
+      if (confirmMsg) {
+        showAlert('Amal muvaffaqiyatli bajarildi!', 'success');
+      }
+    });
+  });
+</script>

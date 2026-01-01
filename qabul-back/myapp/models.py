@@ -80,6 +80,7 @@ class QabulApplication(models.Model):
     parent_passport = models.FileField( "Ota yoki onasi pasporti", upload_to='documents/parent_passport/')
     photo_3x4 = models.FileField("3x4 rasm", upload_to='photos/3x4/')
     created_at = models.DateTimeField( auto_now_add=True)
+    is_published = models.BooleanField(blank=True,null=True, verbose_name='chop etish')
 
     class Meta:
         verbose_name = "Qabul arizasi"

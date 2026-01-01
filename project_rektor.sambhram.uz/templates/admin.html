@@ -1,0 +1,293 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Murojaatlar - Virtual Qabulxona</title>
+
+</head>
+<body>
+  <div class="header">
+    <div class="logo">
+      <div class="logo-icon">🎓</div>
+      <span>Jizzax Sambhram — Murojaatlar</span>
+    </div>
+    <nav class="nav">
+      <a href="#" class="nav-link">🏠 Asosiy</a>
+      <a href="#" class="nav-link">📊 Statistika</a>
+      <a href="#" class="nav-link">⚙️ Sozlamalar</a>
+    </nav>
+  </div>
+  
+  <div class="container">
+    <div class="page-header">
+      <h1 class="page-title">Murojaatlar</h1>
+      <p class="page-subtitle">Virtual qabulxonaga kelgan barcha murojaatlar</p>
+    </div>
+    
+    <div class="stats-grid">
+      <div class="stat-box">
+        <div class="stat-icon">📋</div>
+        <div class="stat-number">124</div>
+        <div class="stat-label">Jami murojaatlar</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-icon">🆕</div>
+        <div class="stat-number">23</div>
+        <div class="stat-label">Yangi</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-icon">⏳</div>
+        <div class="stat-number">45</div>
+        <div class="stat-label">Jarayonda</div>
+      </div>
+      <div class="stat-box">
+        <div class="stat-icon">✅</div>
+        <div class="stat-number">56</div>
+        <div class="stat-label">Hal qilingan</div>
+      </div>
+    </div>
+    
+    <div class="filters">
+      <div class="filter-group">
+        <span class="filter-label">Status:</span>
+        <select id="statusFilter">
+          <option value="">Barchasi</option>
+          <option value="new">Yangi</option>
+          <option value="in-progress">Jarayonda</option>
+          <option value="resolved">Hal qilingan</option>
+          <option value="rejected">Rad etilgan</option>
+        </select>
+      </div>
+      
+      <div class="filter-group">
+        <span class="filter-label">Turi:</span>
+        <select id="typeFilter">
+          <option value="">Barchasi</option>
+          <option value="ariza">Ariza</option>
+          <option value="shikoyat">Shikoyat</option>
+          <option value="taklif">Taklif</option>
+        </select>
+      </div>
+      
+      <div class="filter-group" style="flex: 1;">
+        <span class="filter-label">Qidirish:</span>
+        <input type="search" id="searchInput" placeholder="Ism, familiya yoki matn bo'yicha...">
+      </div>
+    </div>
+    
+    <div class="appeals-list" id="appealsList">
+      <!-- Appeals will be dynamically inserted here -->
+    </div>
+  </div>
+  
+  <div class="modal" id="appealModal">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div>
+          <h2 id="modalTitle" style="font-size: 24px; color: #fff; margin-bottom: 8px;">Murojaat tafsilotlari</h2>
+          <p id="modalId" style="font-size: 13px; color: #64748b;"></p>
+        </div>
+        <button class="close-btn" onclick="closeModal()">✕</button>
+      </div>
+      <div class="modal-body" id="modalBody">
+        <!-- Details will be inserted here -->
+      </div>
+    </div>
+  </div>
+  
+  <script>
+    // Sample data
+    const appeals = [
+      {
+        id: 'MRJ-2025-001',
+        name: 'Aliyev Sardor',
+        phone: '+998 91 234 56 78',
+        email: 'sardor@example.com',
+        type: 'Ariza',
+        status: 'new',
+        subject: 'Talabalar uchun yangi laboratoriya zarurligi',
+        message: 'Hurmatli rektor! Bizning fakultetimizda zamonaviy laboratoriya jihozlari yetishmoqda. Talabalarning amaliy bilimlarini oshirish uchun yangi laboratoriya tashkil etish zarur.',
+        date: '22.11.2025',
+        region: 'Jizzax'
+      },
+      {
+        id: 'MRJ-2025-002',
+        name: 'Karimova Dilnoza',
+        phone: '+998 93 567 89 01',
+        email: 'dilnoza@example.com',
+        type: 'Shikoyat',
+        status: 'in-progress',
+        subject: 'Kutubxona kitoblari yetishmasligi',
+        message: 'Kutubxonada darslik va qo\'llanmalar yetarli emas. Ko\'plab talabalar kitob topa olmayapti.',
+        date: '21.11.2025',
+        region: 'Toshkent'
+      },
+      {
+        id: 'MRJ-2025-003',
+        name: 'Rahimov Jamshid',
+        phone: '+998 94 123 45 67',
+        email: 'jamshid@example.com',
+        type: 'Taklif',
+        status: 'resolved',
+        subject: 'Online darslar uchun platforma yaratish',
+        message: 'Pandemiya davrida biz masofaviy ta\'lim sifatini oshirish uchun maxsus platforma yaratishni taklif qilmoqchimiz.',
+        date: '20.11.2025',
+        region: 'Samarqand'
+      },
+      {
+        id: 'MRJ-2025-004',
+        name: 'Toshmatova Nigora',
+        phone: '+998 95 234 56 78',
+        email: 'nigora@example.com',
+        type: 'Ariza',
+        status: 'new',
+        subject: 'Sport majmuasi ta\'miri',
+        message: 'Sport majmuasining ba\'zi jihozlari ishlamay qolgan. Talabalar jismoniy tarbiya mashg\'ulotlarida qiyinchilik bilan duch kelmoqda.',
+        date: '22.11.2025',
+        region: 'Jizzax'
+      },
+      {
+        id: 'MRJ-2025-005',
+        name: 'Usmonov Aziz',
+        phone: '+998 97 345 67 89',
+        email: 'aziz@example.com',
+        type: 'Shikoyat',
+        status: 'in-progress',
+        subject: 'Yotoqxona sharoitlari',
+        message: 'Yotoqxonada isitish tizimi yaxshi ishlamayapti. Talabalar sovuqdan aziyat chekmoqda.',
+        date: '19.11.2025',
+        region: 'Buxoro'
+      }
+    ];
+    
+    const statusLabels = {
+      'new': 'Yangi',
+      'in-progress': 'Jarayonda',
+      'resolved': 'Hal qilingan',
+      'rejected': 'Rad etilgan'
+    };
+    
+    function renderAppeals(data) {
+      const container = document.getElementById('appealsList');
+      container.innerHTML = data.map(appeal => `
+        <div class="appeal-card" onclick="openModal('${appeal.id}')">
+          <div class="appeal-header">
+            <div class="appeal-info">
+              <div class="appeal-id">${appeal.id}</div>
+              <div class="appeal-title">${appeal.subject}</div>
+              <div class="appeal-user">
+                <span>👤 ${appeal.name}</span>
+                <span>•</span>
+                <span>📱 ${appeal.phone}</span>
+              </div>
+            </div>
+            <span class="badge ${appeal.status}">${statusLabels[appeal.status]}</span>
+          </div>
+          <div class="appeal-content">
+            ${appeal.message.substring(0, 150)}...
+          </div>
+          <div class="appeal-footer">
+            <div class="appeal-meta">
+              <span>📅 ${appeal.date}</span>
+              <span>📂 ${appeal.type}</span>
+              <span>📍 ${appeal.region}</span>
+            </div>
+            <div class="appeal-actions">
+              <button class="btn btn-view" onclick="event.stopPropagation(); openModal('${appeal.id}')">Ko'rish</button>
+              <button class="btn btn-secondary" onclick="event.stopPropagation(); alert('Tahrirlash funksiyasi')">Tahrirlash</button>
+            </div>
+          </div>
+        </div>
+      `).join('');
+    }
+    
+    function openModal(id) {
+      const appeal = appeals.find(a => a.id === id);
+      if (!appeal) return;
+      
+      document.getElementById('modalTitle').textContent = appeal.subject;
+      document.getElementById('modalId').textContent = appeal.id;
+      
+      document.getElementById('modalBody').innerHTML = `
+        <div class="detail-row">
+          <div class="detail-label">Ism familiya:</div>
+          <div class="detail-value">${appeal.name}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Telefon:</div>
+          <div class="detail-value">${appeal.phone}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Email:</div>
+          <div class="detail-value">${appeal.email}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Murojaat turi:</div>
+          <div class="detail-value">${appeal.type}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Status:</div>
+          <div class="detail-value"><span class="badge ${appeal.status}">${statusLabels[appeal.status]}</span></div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Sana:</div>
+          <div class="detail-value">${appeal.date}</div>
+        </div>
+        <div class="detail-row">
+          <div class="detail-label">Viloyat:</div>
+          <div class="detail-value">${appeal.region}</div>
+        </div>
+        <div class="detail-row" style="grid-template-columns: 1fr;">
+          <div class="detail-label">Murojaat matni:</div>
+          <div class="detail-value" style="line-height: 1.7; margin-top: 8px;">${appeal.message}</div>
+        </div>
+        <div class="action-buttons">
+          <button class="btn btn-view" style="flex: 1;">Javob berish</button>
+          <button class="btn btn-secondary" style="flex: 1;">Statusni o'zgartirish</button>
+        </div>
+      `;
+      
+      document.getElementById('appealModal').classList.add('active');
+    }
+    
+    function closeModal() {
+      document.getElementById('appealModal').classList.remove('active');
+    }
+    
+    // Filter functionality
+    document.getElementById('statusFilter').addEventListener('change', filterAppeals);
+    document.getElementById('typeFilter').addEventListener('change', filterAppeals);
+    document.getElementById('searchInput').addEventListener('input', filterAppeals);
+    
+    function filterAppeals() {
+      const status = document.getElementById('statusFilter').value;
+      const type = document.getElementById('typeFilter').value;
+      const search = document.getElementById('searchInput').value.toLowerCase();
+      
+      let filtered = appeals.filter(appeal => {
+        const matchStatus = !status || appeal.status === status;
+        const matchType = !type || appeal.type === type;
+        const matchSearch = !search || 
+          appeal.name.toLowerCase().includes(search) ||
+          appeal.subject.toLowerCase().includes(search) ||
+          appeal.message.toLowerCase().includes(search);
+        
+        return matchStatus && matchType && matchSearch;
+      });
+      
+      renderAppeals(filtered);
+    }
+    
+    // Close modal on outside click
+    document.getElementById('appealModal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+    
+    // Initial render
+    renderAppeals(appeals);
+  </script>
+</body>
+</html>

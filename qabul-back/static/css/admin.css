@@ -291,6 +291,7 @@ tbody tr:hover {
 }
 
 .btn {
+    text-decoration: none;
     padding: 8px 15px;
     border: none;
     border-radius: 6px;
@@ -519,4 +520,9 @@ tbody tr:hover {
     .action-buttons {
         flex-direction: column;
     }
+}
+
+
+.card-header{
+    background: linear-gradient(135deg, #003d7a 0%, #0051a5 100%) !important;
 }

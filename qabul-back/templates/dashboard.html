@@ -6,6 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin Dashboard - Jizzax Sambxram Universiteti</title>
     <link rel="stylesheet" href="{% static 'css/admin.css' %}">
+    <style>
+        .btn-success-2{
+            margin:10px auto;
+            width: 200px;
+            text-align: center;
+            background: rgb(16, 163, 131);
+            color: #fff;
+            font-size: 15px;
+        }
+    </style>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
 </head>
 <body>
@@ -41,14 +51,14 @@
             <div class="stat-card">
                 <div class="stat-icon green">✅</div>
                 <div class="stat-info">
-                    <h3 id="approvedApplications">89</h3>
+                    <h3 id="approvedApplications">{{ approved_count }}</h3>
                     <p>Tasdiqlangan</p>
                 </div>
             </div>
             <div class="stat-card">
                 <div class="stat-icon orange">⏳</div>
                 <div class="stat-info">
-                    <h3 id="pendingApplications">45</h3>
+                    <h3 id="pendingApplications">{{ bakalavr_count }}</h3>
                     <p>Kutilmoqda</p>
                 </div>
             </div>
@@ -86,11 +96,8 @@
                                 <td>{{ app.created_at|date:"Y-m-d" }}</td>
                                 <td>
                                     <div class="action-buttons">
-                                        <button class="btn btn-view" onclick="viewDetails({{ app.id }})" title="Ko'rish">
-                                            <i class="fas fa-eye"></i> Ko'rish
-                                        </button>
-                                        <a href="{% url 'myapp:application_detail' app.id %}" class="btn btn-download" onclick="editApplication({{ app.id }})" title="Taxrirlash">
-                                            <i class="fas fa-edit"></i> Tahrirlash
+                                        <a href="{% url 'myapp:application_detail' app.id %}" class="btn btn-view" onclick="viewDetails({{ app.id }})" title="Ko'rish">
+                                            Ko'rish <i class="fas fa-eye"></i> &nbsp;
                                         </a>
                                     </div>
                                 </td>
@@ -104,35 +111,43 @@
                             {% endfor %}
                     </tbody>
                 </table>
-            </div>
-
-            <!-- Pagination -->
-            <div class="pagination" id="pagination">
-                <!-- Django Pagination -->
-                <div class="pagination">
-                    {% if applications.has_previous %}
-                        <a href="?page=1" class="page-btn">⏮ Birinchi</a>
-                        <a href="?page={{ applications.previous_page_number }}" class="page-btn">◀ Oldingi</a>
-                    {% endif %}
-
-                    {% for num in applications.paginator.page_range %}
-                        {% if applications.number == num %}
-                            <span class="page-btn active">{{ num }}</span>
-                        {% elif num > applications.number|add:'-3' and num < applications.number|add:'3' %}
-                            <a href="?page={{ num }}" class="page-btn">{{ num }}</a>
-                        {% endif %}
-                    {% endfor %}
-
-                    {% if applications.has_next %}
-                        <a href="?page={{ applications.next_page_number }}" class="page-btn">Keyingi ▶</a>
-                        <a href="?page={{ applications.paginator.num_pages }}" class="page-btn">Oxirgi ⏭</a>
-                    {% endif %}
-
-                    <span class="page-info">
-                        {{ applications.start_index }}-{{ applications.end_index }} / {{ applications.paginator.count }}
-                    </span>
+                
+                
+                <div class="action-buttons">
+                    <a href="{% url 'myapp:export_excel' %}" class="btn btn-success-2 mb-3">
+                        <i class="fas fa-download"></i>&nbsp; Excel yuklab olish
+                    </a>
                 </div>
+
             </div>
+
+           <!-- Pagination -->
+<div class="pagination">
+
+    {% if applications.has_previous %}
+        <a href="?page=1" class="page-btn">⏮</a>
+        <a href="?page={{ applications.previous_page_number }}" class="page-btn">◀</a>
+    {% endif %}
+
+    {% for num in applications.paginator.page_range %}
+        {% if num == applications.number %}
+            <span class="page-btn active">{{ num }}</span>
+        {% elif num >= applications.number|add:'-2' and num <= applications.number|add:'2' %}
+            <a href="?page={{ num }}" class="page-btn">{{ num }}</a>
+        {% endif %}
+    {% endfor %}
+
+    {% if applications.has_next %}
+        <a href="?page={{ applications.next_page_number }}" class="page-btn">▶</a>
+        <a href="?page={{ applications.paginator.num_pages }}" class="page-btn">⏭</a>
+    {% endif %}
+
+    <span class="page-info">
+        {{ applications.start_index }}–{{ applications.end_index }} /
+        {{ applications.paginator.count }}
+    </span>
+</div>
+
         </div>
     </div>
 
